@@ -33,7 +33,7 @@ async function GetBooks(genre) {
 // GetBooks('horror');
 
 // Create Books
-function GenerateBooks(num) {
+function generateBooks(num) {
   // counter for column position
   let columnPosition = 0; 
   for (let i = 0; i < num; i++) {
@@ -62,4 +62,11 @@ function GenerateBooks(num) {
   }
 }
 
-GenerateBooks(87);
+// GenerateBooks(87);
+
+const generateCollection = document.querySelector('#generate-collection');
+
+generateCollection.addEventListener('click', (e) => {
+  e.preventDefault();
+  generateBooks(87);
+})
