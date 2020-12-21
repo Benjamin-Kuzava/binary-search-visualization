@@ -41,8 +41,8 @@ function generateBooks(num) {
     const bookDiv = document.createElement('div');
     bookDiv.classList.add('book')
     bookDiv.setAttribute("id", `i${i}`);
-    bookDiv.textContent = 'text';
-    randomColor(bookDiv);
+    bookDiv.textContent = `${i}`;
+    // randomColor(bookDiv);
 
     // If i has reached a shelf breakpoint, reset column counter 
     if (i == Math.floor(num * (2 / 3)) || i == Math.floor(num * (1 / 3))) {
