@@ -6,7 +6,7 @@ The Bookcase: Binary Search Visualization
 
 ## Project Description
 
-Users can generate a random collection of books that are then arranged on a virtual bookshelf. Users can select a specific title to see how the binary search algorithm locates a specific book on the shelf. While the serach runs, values tracked within the algorithm are highlighted, including the left and right bounds and current target.
+Users can generate a random collection of books that are then arranged on a virtual bookshelf. Users can select a specific title to see how the binary search algorithm locates a specific book on the shelf. While the search runs, values tracked within the algorithm are highlighted, including the left and right bounds and current target.
 
 Additionally, clicking on a book will allow users to view additional information or follow a link back to Open Library to learn more.
 
