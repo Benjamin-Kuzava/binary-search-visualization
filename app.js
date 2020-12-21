@@ -42,6 +42,7 @@ function generateBooks(num) {
     bookDiv.classList.add('book')
     bookDiv.setAttribute("id", `i${i}`);
     bookDiv.textContent = 'text';
+    randomColor(bookDiv);
 
     // If i has reached a shelf breakpoint, reset column counter 
     if (i == Math.floor(num * (2 / 3)) || i == Math.floor(num * (1 / 3))) {
@@ -67,6 +68,17 @@ function clearBooks() {
   console.log(gridContainer.childNodes.length);
   while (gridContainer.childNodes.length > 7) {
     gridContainer.removeChild(gridContainer.lastChild);
+  }
+}
+
+function randomColor(bookDiv) {
+  let random = Math.floor(Math.random() * 3);
+  if (random === 0) {
+    bookDiv.style.backgroundColor = 'rgb(240, 162, 2)';
+  } else if (random === 1) {
+    bookDiv.style.backgroundColor = 'rgb(39, 7, 34)';
+  } else {
+    bookDiv.style.backgroundColor = 'rgb(173, 106, 108)';
   }
 }
 
