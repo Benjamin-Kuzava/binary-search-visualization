@@ -32,12 +32,12 @@ async function GetBooks(genre) {
 
 // GetBooks('horror');
 
-// Create Books
+// Generate Collection
 function generateBooks(num) {
   // counter for column position
   let columnPosition = 0; 
   for (let i = 0; i < num; i++) {
-    const gridContainer = document.querySelector('.grid-container')
+    const gridContainer = document.querySelector('#grid-container')
     const bookDiv = document.createElement('div');
     bookDiv.classList.add('book')
     bookDiv.setAttribute("id", `i${i}`);
@@ -62,11 +62,18 @@ function generateBooks(num) {
   }
 }
 
-// GenerateBooks(87);
+function clearBooks() {
+  const gridContainer = document.getElementById('grid-container');
+  console.log(gridContainer.childNodes.length);
+  while (gridContainer.childNodes.length > 7) {
+    gridContainer.removeChild(gridContainer.lastChild);
+  }
+}
 
 const generateCollection = document.querySelector('#generate-collection');
 
 generateCollection.addEventListener('click', (e) => {
   e.preventDefault();
+  clearBooks();
   generateBooks(87);
 })

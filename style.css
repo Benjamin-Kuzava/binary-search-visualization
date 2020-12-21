@@ -7,7 +7,7 @@ main {
   flex-direction: column;
 }
 
-.grid-container {
+#grid-container {
   display: grid;
   grid-template-columns: repeat(35, 1fr);
   grid-template-rows: repeat(22, 1fr);
