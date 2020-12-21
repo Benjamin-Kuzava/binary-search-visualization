@@ -2,6 +2,27 @@
   box-sizing: border-box;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+}
+
 .grid {
   display: grid;
+  background-color: slateblue;
+  height: 95vh;
+  width: 100%
+}
+
+.nav-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: tan;
+  height: 5vh;
+  padding: 1em;
+}
+
+select {
+  min-width: 8em;
 }
