@@ -1,3 +1,11 @@
+/* 
+lightcolor: rgb(251, 242, 192)
+brownlight: rgb(72, 57, 42)
+browndark: rgb(67, 40, 28)
+redlight: rgb(249, 111, 93)
+reddark: rgb(192, 110, 82)
+*/
+
 * {
   box-sizing: border-box;
 }
@@ -5,6 +13,7 @@
 main {
   display: flex;
   flex-direction: column;
+  background-color: rgb(251, 242, 192, .9);
 }
 
 #grid-container {
@@ -13,16 +22,29 @@ main {
   grid-template-rows: repeat(22, 1fr);
   column-gap: .5em;
 
-
   height: 95vh;
   width: 90%;
   margin: 0 auto;
   position: relative;
 }
 
+.side-one{
+  background-color: #43281c;
+  grid-column: 2;
+  grid-row: 8 / 23;
+  margin-right: -1em;
+  z-index: 1;
+}
+.side-two{
+  background-color: #43281c;
+  grid-column: 34;
+  grid-row: 8 / 23;
+  margin-left: -1em;
+  z-index: 1;
+}
+
 #s-one {
-  grid-area: shelf-one;
-  background-color: rgba(0,0,0,.7);
+  background-color: #48392a;
   grid-column: 3 / -3;
   grid-row: 9 / 10;
 }
@@ -30,7 +52,7 @@ main {
 #s-one::after {
   content: '';
   position: absolute;
-  background-color: rgba(0,0,0,.8);
+  background-color: #43281c;
   height: 60%;
   top: 0;
   right: 0;
@@ -41,8 +63,7 @@ main {
 }
 
 #s-two {
-  grid-area: shelf-two;
-  background-color: rgba(0,0,0,.7);
+  background-color: #48392a;
   grid-column: 3 / -3;
   grid-row: 14 / 15;
 }
@@ -50,7 +71,7 @@ main {
 #s-two::after {
   content: '';
   position: absolute;
-  background-color: rgba(0,0,0,.8);
+  background-color: #43281c;
   height: 60%;
   top: 0;
   right: 0;
@@ -61,8 +82,7 @@ main {
 }
 
 #s-three {
-  grid-area: shelf-three;
-  background-color: rgba(0,0,0,.7);
+  background-color: #48392a;
   grid-column: 3 / -3;
   grid-row: 19 / 20;
 }
@@ -70,7 +90,7 @@ main {
 #s-three::after {
   content: '';
   position: absolute;
-  background-color: rgba(0,0,0,.8);
+  background-color: #43281c;
   height: 60%;
   top: 0;
   right: 0;
@@ -90,24 +110,12 @@ main {
   text-align: center;
 }
 
-/* #i0 {
-  grid-column: 4;
-  grid-row: 8;
-} */
-#i1 {
-  grid-column: 5;
-  grid-row: 8;
-}
-#i2 {
-  grid-column: 6;
-  grid-row: 8;
-}
 
 .nav-bar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: tan;
+  background-color: rgb(192, 110, 82);
   height: 5vh;
   padding: 1em;
 }

@@ -66,7 +66,7 @@ function generateBooks(num) {
 function clearBooks() {
   const gridContainer = document.getElementById('grid-container');
   console.log(gridContainer.childNodes.length);
-  while (gridContainer.childNodes.length > 7) {
+  while (gridContainer.childNodes.length > 11) {
     gridContainer.removeChild(gridContainer.lastChild);
   }
 }
