@@ -91,9 +91,9 @@ Additionally, clicking on a book will allow users to view additional information
 |  Day | Deliverable | Status
 |---|---| ---|
 |Dec 18| Prompt / Wireframes / Priority Matrix / Timeframes / API Access | Completed
-|Dec 21| Project Approval | Completed
-|Dec 22| Core Application Structure: Basic page layout, code for book generation, basic code for binary search | Completed
-|Dec 23| Pseudocode / code for generating collection on click, selecting book to be searched in dropdown| Partial
+|Dec 21| Project Approval | In Progress
+|Dec 22| Core Application Structure: Basic page layout, code for book generation, basic code for binary search | Incomplete
+|Dec 23| Pseudocode / code for generating collection on click, selecting book to be searched in dropdown| Incomplete
 |Dec 24- Dec 26| Holiday| N/A
 |Dec 28| Pseudocode / code for highlighting book and accessing additional information | Incomplete
 |Dec 30| JS and CSS for visualizing binary search | Incomplete
