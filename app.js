@@ -1,22 +1,18 @@
-// Base Search URL: http://openlibrary.org/search.json?q=${genre}&mode=everything
+// Base Search URL: http://openlibrary.org/subjects/${subject}.json?limit=87
 // Base Img URL: 
 
 // API Requests
 
-async function GetBooks(genre) {
-  const newObj = {};
-  const url = `http://openlibrary.org/search.json?q=${genre}&mode=everything`;
+async function GetBooks(subject) {
+  // const newObj = {};
+  const url = `http://openlibrary.org/subjects/${subject}.json?limit=87`;
   const responses = await axios.get(url)
-  const bookArray = responses.data.docs;
-  // console.log(bookArray)
-  // bookArray.forEach((book => {
-  //   console.log(book.title);
-  //   console.log(book.cover_i)
-  //   console.log(book.author_name[0])
-  // }))
+  const subjectArray = responses;
+  console.log(subjectArray.data)
+  
 }
 
-GetBooks('horror');
+GetBooks('literature');
 
 // Generate Collection
 function generateBooks(num) {
@@ -76,10 +72,6 @@ function randomColor(bookDiv) {
 }
 // Might use^
 
-function linkBooks() {
-
-}
-
 const generateCollection = document.querySelector('#generate-collection');
 
 generateCollection.addEventListener('click', (e) => {
@@ -93,7 +85,7 @@ generateCollection.addEventListener('click', (e) => {
 const startButton = document.querySelector('#start')
 
 startButton.addEventListener('click', (e) => {
-  const array =[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28]
+  const array = testArrayGen(87);
   e.preventDefault();
   function binarySearch(array, target) {
     return searchHelper(array, target, 0, array.length - 1);
@@ -129,3 +121,13 @@ startButton.addEventListener('click', (e) => {
   }
   binarySearch(array, 9);
 })
+
+function testArrayGen(num) {
+  let i = 0;
+  let testArray = [];
+  while (i < num) {
+    testArray.push(i);
+    i++;
+  }
+  return testArray;
+}

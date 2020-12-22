@@ -114,7 +114,7 @@ main {
 
 .book:hover {
   transform: translateY(-10%);
-  background-color: gold;
+  /* background-color: gold; */
   cursor: pointer;
 }
 
