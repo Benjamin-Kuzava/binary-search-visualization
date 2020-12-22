@@ -2,19 +2,35 @@
 // Base Img URL: 
 
 // API Requests
+let subjectArray = [];
 
 async function GetBooks(subject) {
   // const bookArray = [];
-  const url = `http://openlibrary.org/subjects/${subject}.json?limit=87`;
-  const responses = await axios.get(url);
-  const subjectArray = [...responses.data.works];
-  subjectArray.sort((a, b) => {
-    return (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0);
-  });
-  bookOption(subjectArray);
-  return subjectArray;
+  try {
+    const url = `http://openlibrary.org/subjects/${subject}.json?limit=87`;
+    const responses = await axios.get(url);
+    subjectArray = [...responses.data.works];
+    subjectArray.sort((a, b) => {
+      return (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0);
+    });
+    bookOption(subjectArray);
+    return subjectArray;
+  } catch (error) {
+    console.log(error)
+  }
 }
-console.log(GetBooks('literature'));
+
+GetBooks('literature');
+
+function bookOption(subjectArray) {
+  const select = document.querySelector("#book-dropdown");
+  return subjectArray.forEach((book) => {
+    const option = document.createElement('option');
+    option.value = `${book.title}`;
+    option.textContent = `${book.title}`;
+    select.append(option);
+  });
+}
 
 // Generate Collection
 function generateBooks(num) {
@@ -99,13 +115,16 @@ startButton.addEventListener('click', (e) => {
     const potentialMatch = array[mid];
     let leftBook = document.querySelector(`#i${array[left]}`);
     let rightBook = document.querySelector(`#i${array[right]}`);
+    let potentialBook = document.querySelector(`#i${array[mid]}`);
 
     leftBook.style.backgroundColor = 'gold';
     rightBook.style.backgroundColor = 'gold';
     if (target === potentialMatch) {
-      rightBook.style.backgroundColor = 'green';
+      leftBook.style.backgroundColor = 'rgb(249, 111, 93)';
+      rightBook.style.backgroundColor = 'rgb(249, 111, 93)';
+      potentialBook.style.backgroundColor = 'green';
       setTimeout(() => {
-        rightBook.style.backgroundColor = 'rgb(249, 111, 93)';
+        potentialBook.style.backgroundColor = 'rgb(249, 111, 93)';
       }, 1500)
       return mid;
       // ^Note: here, it should return a function to open a div and display info
@@ -121,7 +140,7 @@ startButton.addEventListener('click', (e) => {
       }, 1000);
     }
   }
-  binarySearch(array, 9);
+  binarySearch(array, 59);
 })
 
 function testArrayGen(num) {
@@ -138,14 +157,4 @@ function testArrayGen(num) {
 // To each book div, make inner text a shortened version of the book title
 // when a book is clicked (or searched for), pull up a new div whose content is related to 
   // the bookDiv's id(i${number} and the book array's index(array[${number}]))
-// populate dropdown menu with each book title
 
-function bookOption(subjectArray) {
-  const select = document.querySelector("#book-dropdown");
-  return subjectArray.forEach((book) => {
-    const option = document.createElement('option');
-    option.value = `${book.title}`;
-    option.textContent = `${book.title}`;
-    select.append(option);
-  });
-}

@@ -143,3 +143,9 @@ select {
   background-color: rgb(72, 57, 42);
   border: 0;
 }
+
+#book-dropdown {
+  min-width: 291px; /* exact size of element when it becomes populated*/
+  background-color: rgb(72, 57, 42);
+  border: 0;
+}
