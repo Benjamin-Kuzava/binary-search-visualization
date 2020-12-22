@@ -4,18 +4,17 @@
 // API Requests
 
 async function GetBooks(subject) {
-  const bookArray = [];
+  // const bookArray = [];
   const url = `http://openlibrary.org/subjects/${subject}.json?limit=87`;
-  const responses = await axios.get(url)
+  const responses = await axios.get(url);
   const subjectArray = [...responses.data.works];
   subjectArray.sort((a, b) => {
-    return (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
-  }
-  console.log(subjectArray)
-  
+    return (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0);
+  });
+  bookOption(subjectArray);
+  return subjectArray;
 }
-
-GetBooks('literature');
+console.log(GetBooks('literature'));
 
 // Generate Collection
 function generateBooks(num) {
@@ -133,4 +132,20 @@ function testArrayGen(num) {
     i++;
   }
   return testArray;
+}
+
+
+// To each book div, make inner text a shortened version of the book title
+// when a book is clicked (or searched for), pull up a new div whose content is related to 
+  // the bookDiv's id(i${number} and the book array's index(array[${number}]))
+// populate dropdown menu with each book title
+
+function bookOption(subjectArray) {
+  const select = document.querySelector("#book-dropdown");
+  return subjectArray.forEach((book) => {
+    const option = document.createElement('option');
+    option.value = `${book.title}`;
+    option.textContent = `${book.title}`;
+    select.append(option);
+  });
 }
