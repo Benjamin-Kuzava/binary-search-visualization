@@ -108,11 +108,13 @@ generateCollection.addEventListener('click', (e) => {
 
 const startButton = document.querySelector('#start')
 
+
 startButton.addEventListener('click', (e) => {
-  const array = testArrayGen(87);
-  let target = selectBookToSearch();
   e.preventDefault();
-  selectBookToSearch();
+  const array = testArrayGen(87);
+  let slider = document.querySelector('#adjust-speed').value;
+  let speed = selectSpeed(slider);
+  let target = selectBookToSearch();
   function binarySearch(array, target) {
     return searchHelper(array, target, 0, array.length - 1);
   }
@@ -140,12 +142,12 @@ startButton.addEventListener('click', (e) => {
       setTimeout(() => {
         rightBook.style.backgroundColor = 'rgb(249, 111, 93)';
         return searchHelper(array, target, left, mid - 1)
-      }, 1000);
+      }, speed);
     } else {
       setTimeout(() => {
         leftBook.style.backgroundColor = 'rgb(249, 111, 93)';
         return searchHelper(array, target, mid + 1, right)
-      }, 1000);
+      }, speed);
     }
   }
   binarySearch(array, target);
@@ -161,10 +163,6 @@ function testArrayGen(num) {
   return testArray;
 }
 
-
-// when a book is clicked (or searched for), pull up a new div whose content is related to 
-  // the bookDiv's id(i${number} and the book array's index(array[${number}]))
-
 function selectBookToSearch() {
   const select = document.querySelector('#book-dropdown')
   let index;
@@ -176,15 +174,12 @@ function selectBookToSearch() {
   }
 }
 
-
-// I want the index of the object in subjectArray 
-// where subjectArray[index].title === select.value
-// iterate through 
-
-/*
-for (let i = 0; i < subjectArray.length; i++) {
-  if(subjectArray[i].title === select.value) {
-  return i;
+function selectSpeed(slider) {
+  if (slider == 1) {
+    return 1000;
+  } else if (slider == 2) {
+    return 500
+  } else {
+    return 250;
   }
 }
-*/
