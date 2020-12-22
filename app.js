@@ -32,7 +32,11 @@ function bookOption(subjectArray) {
 }
 
 function shortedTitle(title) {
-  return `${title.slice(0, 6)}...`;
+  if (title.length === 7) {
+    return `${title}`
+  } else {
+    return `${title.slice(0, 7)}...`;
+  }
   // Adjust later to check if the slice ends with a space
 }
 
