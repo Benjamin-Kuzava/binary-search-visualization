@@ -22,7 +22,7 @@ main {
   grid-template-rows: repeat(22, 1fr);
   column-gap: .5em;
 
-  height: 95vh;
+  height: 92vh;
   width: 90%;
   margin: 0 auto;
   position: relative;
@@ -106,8 +106,9 @@ main {
   width: 100%;
   max-width: 32px;
   height: 170%;
+  max-height: 80px;
   z-index: 1;
-  writing-mode: vertical-lr;
+  writing-mode: vertical-rl;
   text-align: center;
   transition: transform 250ms;
 }
@@ -122,8 +123,9 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   background-color: rgb(192, 110, 82);
-  height: 5vh;
+  height: 8vh;
   padding: .5em;
 }
 
@@ -148,4 +150,11 @@ select {
   min-width: 291px; /* exact size of element when it becomes populated*/
   background-color: rgb(72, 57, 42);
   border: 0;
+}
+
+#adjust-speed {
+  appearance: none;
+  outline: none;
+  border-radius: 10px;
+  cursor: pointer;
 }

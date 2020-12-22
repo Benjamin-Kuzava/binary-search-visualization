@@ -5,7 +5,6 @@
 let subjectArray = [];
 
 async function GetBooks(subject) {
-  // const bookArray = [];
   try {
     const url = `http://openlibrary.org/subjects/${subject}.json?limit=87`;
     const responses = await axios.get(url);
@@ -16,7 +15,7 @@ async function GetBooks(subject) {
     bookOption(subjectArray);
     return subjectArray;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 }
 
@@ -32,6 +31,11 @@ function bookOption(subjectArray) {
   });
 }
 
+function shortedTitle(title) {
+  return `${title.slice(0, 6)}...`;
+  // Adjust later to check if the slice ends with a space
+}
+
 // Generate Collection
 function generateBooks(num) {
   // counter for column position
@@ -40,10 +44,12 @@ function generateBooks(num) {
     setTimeout(() => {
       const gridContainer = document.querySelector('#grid-container')
       const bookDiv = document.createElement('div');
+      let shortened = shortedTitle(subjectArray[i].title); // Consider taking care of this on load instead
 
       bookDiv.classList.add('book')
       bookDiv.setAttribute("id", `i${i}`);
-      bookDiv.textContent = `${i}`;
+      bookDiv.textContent = `${shortened}`;
+      // bookDiv.textContent = `${i}`;
       // randomColor(bookDiv);
 
       // If i has reached column limit, reset column counter 
@@ -104,7 +110,9 @@ const startButton = document.querySelector('#start')
 
 startButton.addEventListener('click', (e) => {
   const array = testArrayGen(87);
+  let target = selectBookToSearch();
   e.preventDefault();
+  selectBookToSearch();
   function binarySearch(array, target) {
     return searchHelper(array, target, 0, array.length - 1);
   }
@@ -140,7 +148,7 @@ startButton.addEventListener('click', (e) => {
       }, 1000);
     }
   }
-  binarySearch(array, 59);
+  binarySearch(array, target);
 })
 
 function testArrayGen(num) {
@@ -154,7 +162,29 @@ function testArrayGen(num) {
 }
 
 
-// To each book div, make inner text a shortened version of the book title
 // when a book is clicked (or searched for), pull up a new div whose content is related to 
   // the bookDiv's id(i${number} and the book array's index(array[${number}]))
 
+function selectBookToSearch() {
+  const select = document.querySelector('#book-dropdown')
+  let index;
+  for (let i = 0; i < subjectArray.length; i++) {
+    if(subjectArray[i].title === select.value) {
+      index = i;
+      return index;
+    }
+  }
+}
+
+
+// I want the index of the object in subjectArray 
+// where subjectArray[index].title === select.value
+// iterate through 
+
+/*
+for (let i = 0; i < subjectArray.length; i++) {
+  if(subjectArray[i].title === select.value) {
+  return i;
+  }
+}
+*/
