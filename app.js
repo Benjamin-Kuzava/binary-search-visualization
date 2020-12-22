@@ -93,44 +93,31 @@ const startButton = document.querySelector('#start')
 startButton.addEventListener('click', (e) => {
   const array =[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28]
   e.preventDefault();
-  function vBinarySearch(array, target) {
-    return vSearchHelper(array, target, 0, array.length - 1);
+  function binarySearch(array, target) {
+    return searchHelper(array, target, 0, array.length - 1);
   }
-
-  function vSearchHelper(array, target, left, right) {
-    // const leftDiv = document.querySelector(`#i${array[0]}`);
-    // const rightDiv = document.querySelector(`#i${array[array.length - 1]}`);
+  
+  function searchHelper(array, target, left, right) {
     if (left > right) return -1;
-    // leftDiv.style.color = 'gold';
-    // rightDiv.style.color = 'gold';
+    
+    document.querySelector(`#i${array[left]}`).style.backgroundColor = 'gold';
+    document.querySelector(`#i${array[right]}`).style.backgroundColor = 'gold';
     const mid = Math.floor((left + right) / 2);
     const potentialMatch = array[mid];
     if (target === potentialMatch) {
+      document.querySelector(`#i${array[right]}`).style.backgroundColor = 'green';
       return mid;
     } else if (target < potentialMatch) {
-      return searchHelper(array, target, left, mid - 1);
+      setTimeout(() => {
+        document.querySelector(`#i${array[right]}`).style.backgroundColor = 'rgb(249, 111, 93)';
+        return searchHelper(array, target, left, mid - 1)
+      }, 1000);
     } else {
-      return searchHelper(array, target, mid + 1, right);
+      setTimeout(() => {
+        document.querySelector(`#i${array[left]}`).style.backgroundColor = 'rgb(249, 111, 93)';
+        return searchHelper(array, target, mid + 1, right)
+      }, 1000);
     }
   }
-  vBinarySearch(array, 9);
+  binarySearch(array, 9);
 })
-
-// highlight the left and right bounds of search
-
-function binarySearch(array, target) {
-  return searchHelper(array, target, 0, array.length - 1);
-}
-
-function searchHelper(array, target, left, right) {
-	if (left > right) return -1;
-	const mid = Math.floor((left + right) / 2);
-	const potentialMatch = array[mid];
-	if (target === potentialMatch) {
-		return mid;
-	} else if (target < potentialMatch) {
-		return searchHelper(array, target, left, mid - 1);
-	} else {
-		return searchHelper(array, target, mid + 1, right);
-	}
-}
