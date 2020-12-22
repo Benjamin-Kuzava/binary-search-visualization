@@ -4,11 +4,14 @@
 // API Requests
 
 async function GetBooks(subject) {
-  // const newObj = {};
+  const bookArray = [];
   const url = `http://openlibrary.org/subjects/${subject}.json?limit=87`;
   const responses = await axios.get(url)
-  const subjectArray = responses;
-  console.log(subjectArray.data)
+  const subjectArray = [...responses.data.works];
+  subjectArray.sort((a, b) => {
+    return (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
+  }
+  console.log(subjectArray)
   
 }
 
