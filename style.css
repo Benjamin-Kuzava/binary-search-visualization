@@ -104,12 +104,19 @@ main {
   background-color: rgb(249, 111, 93);
   border-radius: 10%;
   width: 100%;
+  max-width: 32px;
   height: 170%;
   z-index: 1;
   writing-mode: vertical-lr;
   text-align: center;
+  transition: transform 250ms;
 }
 
+.book:hover {
+  transform: translateY(-10%);
+  background-color: gold;
+  cursor: pointer;
+}
 
 .nav-bar {
   display: flex;
@@ -117,9 +124,22 @@ main {
   justify-content: space-between;
   background-color: rgb(192, 110, 82);
   height: 5vh;
-  padding: 1em;
+  padding: .5em;
 }
+
+.nav-item {
+  border: none;
+  padding: .5em 1em;
+  height: 3em;
+  cursor: pointer;
+  border-radius: 10px;
+  background-color: rgb(72, 57, 42);
+  color: whitesmoke;
+}
+
 
 select {
   min-width: 8em;
+  background-color: rgb(72, 57, 42);
+  border: 0;
 }
