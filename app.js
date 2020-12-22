@@ -32,7 +32,7 @@ function generateBooks(num) {
       bookDiv.textContent = `${i}`;
       // randomColor(bookDiv);
 
-      // If i has reached a shelf breakpoint, reset column counter 
+      // If i has reached column limit, reset column counter 
       if (i == Math.floor(num * (2 / 3)) || i == Math.floor(num * (1 / 3))) {
         columnPosition = 0;
       }
@@ -63,6 +63,7 @@ function clearBooks() {
   }
 }
 
+// Might use
 function randomColor(bookDiv) {
   let random = Math.floor(Math.random() * 3);
   if (random === 0) {
@@ -73,6 +74,7 @@ function randomColor(bookDiv) {
     bookDiv.style.backgroundColor = 'rgb(173, 106, 108)';
   }
 }
+// Might use^
 
 function linkBooks() {
 
@@ -99,22 +101,28 @@ startButton.addEventListener('click', (e) => {
   
   function searchHelper(array, target, left, right) {
     if (left > right) return -1;
-    
-    document.querySelector(`#i${array[left]}`).style.backgroundColor = 'gold';
-    document.querySelector(`#i${array[right]}`).style.backgroundColor = 'gold';
     const mid = Math.floor((left + right) / 2);
     const potentialMatch = array[mid];
+    let leftBook = document.querySelector(`#i${array[left]}`);
+    let rightBook = document.querySelector(`#i${array[right]}`);
+
+    leftBook.style.backgroundColor = 'gold';
+    rightBook.style.backgroundColor = 'gold';
     if (target === potentialMatch) {
-      document.querySelector(`#i${array[right]}`).style.backgroundColor = 'green';
+      rightBook.style.backgroundColor = 'green';
+      setTimeout(() => {
+        rightBook.style.backgroundColor = 'rgb(249, 111, 93)';
+      }, 1500)
       return mid;
+      // ^Note: here, it should return a function to open a div and display info
     } else if (target < potentialMatch) {
       setTimeout(() => {
-        document.querySelector(`#i${array[right]}`).style.backgroundColor = 'rgb(249, 111, 93)';
+        rightBook.style.backgroundColor = 'rgb(249, 111, 93)';
         return searchHelper(array, target, left, mid - 1)
       }, 1000);
     } else {
       setTimeout(() => {
-        document.querySelector(`#i${array[left]}`).style.backgroundColor = 'rgb(249, 111, 93)';
+        leftBook.style.backgroundColor = 'rgb(249, 111, 93)';
         return searchHelper(array, target, mid + 1, right)
       }, 1000);
     }
