@@ -132,7 +132,7 @@ function randomColor(bookDiv) {
 const startButton = document.querySelector('#start')
 startButton.addEventListener('click', (e) => {
   e.preventDefault();
-  const array = testArrayGen(87);
+  const array = arrayGeneration(87);
   let slider = document.querySelector('#adjust-speed').value;
   let speed = selectSpeed(slider);
   let target = selectBookToSearch();
@@ -215,7 +215,7 @@ closeInfo.addEventListener('click', (e) => {
 })
 
 
-function testArrayGen(num) {
+function arrayGeneration(num) {
   let result = [];
   let i = 0;
   while (i < num) {

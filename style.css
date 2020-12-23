@@ -180,10 +180,38 @@ select {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, 1fr);  
+  grid-gap: 1em;
 }
 
 .hidden {
   display: none;
+}
+
+.img-placeholder {
+  margin: 1em;
+  grid-column: 1 / 2;
+  grid-row: 1 / 6;
+  border: 1px solid black;
+  border-radius: 5px;
+  /* box-shadow: 10px 5px 0 rbga(0, 0, 0, .9); */
+}
+
+.book-title {
+  grid-column: 2 / 6;
+  grid-row: 1 / 1;
+}
+
+.author-name {
+  grid-column: 2 / 6;
+  grid-row: 2 / 2;
+  margin-top: -2em;
+  font-variant: small-caps;
+}
+
+.book-content {
+  grid-column: 2 / 4;
+  grid-row:  3 / 6;
+  margin-top: -3em;
 }
 
 #result-close {
