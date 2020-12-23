@@ -11,6 +11,8 @@
 
 * {
   box-sizing: border-box;
+  font-family: var(--ff-serif);
+  font-size: 1rem;
 }
 
 main {
@@ -105,15 +107,27 @@ main {
 
 .book {
   background-color: var(--clr-redlight);
+  background-size: cover;
   border-radius: 10%;
   width: 100%;
-  max-width: 32px;
+  /* max-width: 32px; */
   height: 170%;
-  max-height: 80px;
+  /* max-height: 80px; */
   z-index: 1;
   writing-mode: vertical-rl;
   text-align: center;
   transition: transform 250ms;
+  /* position: relative; */
+}
+.book::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: chartreuse;
+  z-index: 4;
+  width: 100%;
 }
 
 .book:hover {

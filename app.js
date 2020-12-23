@@ -51,12 +51,17 @@ function generateBooks(num) {
     setTimeout(() => {
       const gridContainer = document.querySelector('#grid-container')
       const bookDiv = document.createElement('div');
-      let shortened = shortedTitle(subjectArray[i]['title']); // Consider taking care of this on load instead
+      let shortened = shortedTitle(subjectArray[i]['title']);
+      const img = document.createElement('img')
 
       bookDiv.classList.add('book')
       bookDiv.setAttribute("id", `i${i}`);
+      // bookDiv.style.backgroundImage = `url(http://covers.openlibrary.org/b/id/${subjectArray[i]['cover_id']}-L.jpg)`
       bookDiv.textContent = `${shortened}`;
+      // bookDiv.textContent = `${i}`;
       // randomColor(bookDiv); // may use
+      
+
 
       // If i has reached column limit, reset column counter 
       if (i == Math.floor(num * (2 / 3)) || i == Math.floor(num * (1 / 3))) {
@@ -82,10 +87,10 @@ function generateBooks(num) {
 
 // Adjust title for book div
 function shortedTitle(title) {
-  if (title.length === 7) {
+  if (title.length === 4) {
     return `${title}`
   } else {
-    return `${title.slice(0, 7)}...`;
+    return `${title.slice(0, 4)}...`;
   }
   // Adjust later to check if the slice ends with a space
 }
@@ -217,7 +222,8 @@ const closeInfo = document.querySelector('#result-close');
     const imgPlaceholder = document.querySelector('.img-placeholder');
     imgPlaceholder.src = `http://covers.openlibrary.org/b/id/${id}-L.jpg`
 } 
-  
+ 
+// Add content to book info div
 function populateBookInfo(index) {
   // const imgPlaceholder = document.querySelector('.img-placeholder');
   const bookTitle = document.querySelector('.book-title');
@@ -228,7 +234,7 @@ function populateBookInfo(index) {
   AuthorName.textContent = subjectArray[index].authors[0]['name'];
 }
 
-
+// Disable buttons after click
 function disableButton(button, time) {
   button.disabled = true;
   setTimeout(() => {
