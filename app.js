@@ -9,18 +9,17 @@ async function getBooks(subject) {
   try {
     const url = `http://openlibrary.org/subjects/${subject}.json?limit=87`;
     const responses = await axios.get(url);
-    // console.log(responses.data.works)
     subjectArray = [...responses.data.works];
     subjectArray.sort((a, b) => {
       return (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0);
     });
+    // console.log(subjectArray);
     bookOption(subjectArray);
     return subjectArray;
   } catch (error) {
     console.log(error);
   }
 }
-
 getBooks('literature');
 
 // Append book titles to dropdown
@@ -51,17 +50,13 @@ function generateBooks(num) {
     setTimeout(() => {
       const gridContainer = document.querySelector('#grid-container')
       const bookDiv = document.createElement('div');
-      let shortened = shortedTitle(subjectArray[i]['title']);
+      // let shortened = shortedTitle(subjectArray[i]['title']);
       const img = document.createElement('img')
 
       bookDiv.classList.add('book')
       bookDiv.setAttribute("id", `i${i}`);
-      // bookDiv.style.backgroundImage = `url(http://covers.openlibrary.org/b/id/${subjectArray[i]['cover_id']}-L.jpg)`
-      bookDiv.textContent = `${shortened}`;
-      // bookDiv.textContent = `${i}`;
-      // randomColor(bookDiv); // may use
-      
-
+      bookDiv.style.backgroundImage = `url(http://covers.openlibrary.org/b/id/${subjectArray[i]['cover_id']}-L.jpg)`
+      // bookDiv.textContent = `${shortened}`;
 
       // If i has reached column limit, reset column counter 
       if (i == Math.floor(num * (2 / 3)) || i == Math.floor(num * (1 / 3))) {
@@ -100,18 +95,6 @@ function clearBooks() {
   const gridContainer = document.getElementById('grid-container');
   while (gridContainer.childNodes.length > 11) {
     gridContainer.removeChild(gridContainer.lastChild);
-  }
-}
-
-// Might use
-function randomColor(bookDiv) {
-  let random = Math.floor(Math.random() * 3);
-  if (random === 0) {
-    bookDiv.style.backgroundColor = 'rgb(240, 162, 2)';
-  } else if (random === 1) {
-    bookDiv.style.backgroundColor = 'rgb(39, 7, 34)';
-  } else {
-    bookDiv.style.backgroundColor = 'rgb(173, 106, 108)';
   }
 }
 
@@ -220,7 +203,11 @@ const closeInfo = document.querySelector('#result-close');
 
   function getCover(id) {
     const imgPlaceholder = document.querySelector('.img-placeholder');
-    imgPlaceholder.src = `http://covers.openlibrary.org/b/id/${id}-L.jpg`
+    if (id === null) {
+      imgPlaceholder.src = 'assets/wp404error.jpg'
+    } else {
+      imgPlaceholder.src = `http://covers.openlibrary.org/b/id/${id}-L.jpg`
+    }
 } 
  
 // Add content to book info div

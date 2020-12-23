@@ -12,7 +12,7 @@
 * {
   box-sizing: border-box;
   font-family: var(--ff-serif);
-  font-size: 1rem;
+  /* font-size: 1rem; */
 }
 
 main {
@@ -106,7 +106,8 @@ main {
 }
 
 .book {
-  background-color: var(--clr-redlight);
+  background-color: 'gold';
+  /* background-blend-mode: color; */
   background-size: cover;
   border-radius: 10%;
   width: 100%;
@@ -119,15 +120,9 @@ main {
   transition: transform 250ms;
   /* position: relative; */
 }
+
 .book::before {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: chartreuse;
-  z-index: 4;
-  width: 100%;
+  
 }
 
 .book:hover {
@@ -207,6 +202,8 @@ select {
   grid-row: 1 / 6;
   border: 1px solid black;
   border-radius: 5px;
+  height: 477px;
+  width: 298px;
   /* box-shadow: 10px 5px 0 rbga(0, 0, 0, .9); */
 }
 
