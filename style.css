@@ -163,18 +163,31 @@ select {
   cursor: pointer;
 }
 
-.hidden {
-  /* display: none; */
+.result {
   background-color: var(--clr-white);
   border: 2px solid var(--clr-reddark);
   border-radius: 10px;
   z-index: 3;
   width: 80vh;
-  height: 90vh;
+  height: 50vh;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   margin: 4em auto;
+
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);  
+}
+
+.hidden {
+  display: none;
+}
+
+#result-close {
+  grid-row: 5;
+  grid-column: 5;
+  margin: 5em 2em .5em 2em;
 }

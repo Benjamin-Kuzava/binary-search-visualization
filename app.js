@@ -1,13 +1,14 @@
 // Base Search URL: http://openlibrary.org/subjects/${subject}.json?limit=87
-// Base Img URL: 
+// Base Img URL: http://covers.openlibrary.org/b/id/${id}-L.jpg
 
 // API Requests
 let subjectArray = [];
 
-async function GetBooks(subject) {
+async function getBooks(subject) {
   try {
     const url = `http://openlibrary.org/subjects/${subject}.json?limit=87`;
     const responses = await axios.get(url);
+    // console.log(responses.data.works)
     subjectArray = [...responses.data.works];
     subjectArray.sort((a, b) => {
       return (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0);
@@ -19,7 +20,24 @@ async function GetBooks(subject) {
   }
 }
 
-GetBooks('literature');
+async function getCover(coverId) {
+  try {
+    const headers = {
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      }
+    }
+    const url = `http://covers.openlibrary.org/b/id/${coverId}-L.jpg`;
+    const response = await axios.get(url, headers);
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+getBooks('literature');
+// getCover('8281954');
 
 function bookOption(subjectArray) {
   const select = document.querySelector("#book-dropdown");
@@ -139,7 +157,10 @@ startButton.addEventListener('click', (e) => {
       potentialBook.style.backgroundColor = 'green';
       setTimeout(() => {
         potentialBook.style.backgroundColor = 'rgb(249, 111, 93)';
-      }, 1500)
+      }, 1000)
+      setTimeout(() => {
+        displayInfo();
+      }, 750)
       return mid;
       // ^Note: here, it should return a function to open a div and display info
     } else if (target < potentialMatch) {
@@ -187,6 +208,18 @@ function selectSpeed(slider) {
     return 250;
   }
 }
+
+function displayInfo() {
+  const result = document.querySelector('.result');
+  result.classList.toggle('hidden')
+}
+
+const closeInfo = document.querySelector('#result-close');
+
+closeInfo.addEventListener('click', (e) => {
+  e.preventDefault();
+  displayInfo();
+})
 
 // Result functions
 
