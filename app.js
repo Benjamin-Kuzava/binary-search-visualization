@@ -21,24 +21,7 @@ async function getBooks(subject) {
   }
 }
 
-// Grab cover using coverID
-async function getCover(coverId) {
-  try {
-    const headers = {
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      }
-    }
-    const url = `http://covers.openlibrary.org/b/id/${coverId}-L.jpg`;
-    const response = await axios.get(url, headers);
-    console.log(response);
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 getBooks('literature');
-// getCover('8281954');
 
 // Append book titles to dropdown
 function bookOption(subjectArray) {
@@ -61,12 +44,14 @@ generateCollection.addEventListener('click', (e) => {
 
 // Generate collection
 function generateBooks(num) {
+  const generateCollection = document.querySelector('#generate-collection');
+  disableButton(generateCollection, 2500);
   let columnPosition = 0; 
   for (let i = 0; i < num; i++) {
     setTimeout(() => {
       const gridContainer = document.querySelector('#grid-container')
       const bookDiv = document.createElement('div');
-      let shortened = shortedTitle(subjectArray[i].title); // Consider taking care of this on load instead
+      let shortened = shortedTitle(subjectArray[i]['title']); // Consider taking care of this on load instead
 
       bookDiv.classList.add('book')
       bookDiv.setAttribute("id", `i${i}`);
@@ -156,6 +141,8 @@ startButton.addEventListener('click', (e) => {
       setTimeout(() => {
         potentialBook.style.backgroundColor = 'rgb(249, 111, 93)';
       }, 1000)
+      getCover(subjectArray[mid]['cover_id']);
+      populateBookInfo(mid);
       setTimeout(() => {
         displayInfo();
       }, 750)
@@ -209,18 +196,42 @@ function displayInfo() {
 
 // Event listeners inside book info
 const closeInfo = document.querySelector('#result-close');
-closeInfo.addEventListener('click', (e) => {
-  e.preventDefault();
-  displayInfo();
-})
+  closeInfo.addEventListener('click', (e) => {
+    e.preventDefault();
+    displayInfo();
+  });
 
 
-function arrayGeneration(num) {
-  let result = [];
-  let i = 0;
-  while (i < num) {
-    result.push(i);
-    i++;
+  function arrayGeneration(num) {
+    let result = [];
+    let i = 0;
+    while (i < num) {
+      result.push(i);
+      i++;
+    }
+    return result;
   }
-  return result;
+
+
+  function getCover(id) {
+    const imgPlaceholder = document.querySelector('.img-placeholder');
+    imgPlaceholder.src = `http://covers.openlibrary.org/b/id/${id}-L.jpg`
+} 
+  
+function populateBookInfo(index) {
+  // const imgPlaceholder = document.querySelector('.img-placeholder');
+  const bookTitle = document.querySelector('.book-title');
+  const AuthorName = document.querySelector('.author-name');
+  // const bookContent = document.querySelector('.book-content');
+
+  bookTitle.textContent = subjectArray[index]['title'];
+  AuthorName.textContent = subjectArray[index].authors[0]['name'];
+}
+
+
+function disableButton(button, time) {
+  button.disabled = true;
+  setTimeout(() => {
+    button.disabled = false
+  }, time)
 }
