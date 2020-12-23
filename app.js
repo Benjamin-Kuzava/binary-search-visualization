@@ -213,3 +213,14 @@ closeInfo.addEventListener('click', (e) => {
   e.preventDefault();
   displayInfo();
 })
+
+
+function testArrayGen(num) {
+  let result = [];
+  let i = 0;
+  while (i < num) {
+    result.push(i);
+    i++;
+  }
+  return result;
+}
