@@ -4,6 +4,7 @@
 // API Requests
 let subjectArray = [];
 
+// Grab array of book objects from API
 async function getBooks(subject) {
   try {
     const url = `http://openlibrary.org/subjects/${subject}.json?limit=87`;
@@ -20,6 +21,7 @@ async function getBooks(subject) {
   }
 }
 
+// Grab cover using coverID
 async function getCover(coverId) {
   try {
     const headers = {
@@ -35,10 +37,10 @@ async function getCover(coverId) {
   }
 }
 
-
 getBooks('literature');
 // getCover('8281954');
 
+// Append book titles to dropdown
 function bookOption(subjectArray) {
   const select = document.querySelector("#book-dropdown");
   return subjectArray.forEach((book) => {
@@ -49,18 +51,16 @@ function bookOption(subjectArray) {
   });
 }
 
-function shortedTitle(title) {
-  if (title.length === 7) {
-    return `${title}`
-  } else {
-    return `${title.slice(0, 7)}...`;
-  }
-  // Adjust later to check if the slice ends with a space
-}
+// Event Listener for generating collection
+const generateCollection = document.querySelector('#generate-collection');
+generateCollection.addEventListener('click', (e) => {
+  e.preventDefault();
+  clearBooks();
+  generateBooks(87);
+})
 
-// Generate Collection
+// Generate collection
 function generateBooks(num) {
-  // counter for column position
   let columnPosition = 0; 
   for (let i = 0; i < num; i++) {
     setTimeout(() => {
@@ -71,8 +71,7 @@ function generateBooks(num) {
       bookDiv.classList.add('book')
       bookDiv.setAttribute("id", `i${i}`);
       bookDiv.textContent = `${shortened}`;
-      // bookDiv.textContent = `${i}`;
-      // randomColor(bookDiv);
+      // randomColor(bookDiv); // may use
 
       // If i has reached column limit, reset column counter 
       if (i == Math.floor(num * (2 / 3)) || i == Math.floor(num * (1 / 3))) {
@@ -89,15 +88,24 @@ function generateBooks(num) {
         bookDiv.style.gridRow = 8;
       }
       gridContainer.append(bookDiv);
-      // bookDiv.addEventListener('click', () => {
-        
-      //   bookDiv.style.backgroundColor = 'gold';
-      // })
       columnPosition++;
     }, 25*i);
   }
 }
 
+// Helper functions for generating collection
+
+// Adjust title for book div
+function shortedTitle(title) {
+  if (title.length === 7) {
+    return `${title}`
+  } else {
+    return `${title.slice(0, 7)}...`;
+  }
+  // Adjust later to check if the slice ends with a space
+}
+
+// Clear books before re-generating collection
 function clearBooks() {
   const gridContainer = document.getElementById('grid-container');
   while (gridContainer.childNodes.length > 11) {
@@ -116,21 +124,12 @@ function randomColor(bookDiv) {
     bookDiv.style.backgroundColor = 'rgb(173, 106, 108)';
   }
 }
-// Might use^
-
-const generateCollection = document.querySelector('#generate-collection');
-
-generateCollection.addEventListener('click', (e) => {
-  e.preventDefault();
-  clearBooks();
-  generateBooks(87);
-})
 
 // Algo Visualization
 
+// Event listener for algo visualization
+  // Might clean this up by pulling out the algo as its own function
 const startButton = document.querySelector('#start')
-
-
 startButton.addEventListener('click', (e) => {
   e.preventDefault();
   const array = testArrayGen(87);
@@ -140,7 +139,6 @@ startButton.addEventListener('click', (e) => {
   function binarySearch(array, target) {
     return searchHelper(array, target, 0, array.length - 1);
   }
-  
   function searchHelper(array, target, left, right) {
     if (left > right) return -1;
     const mid = Math.floor((left + right) / 2);
@@ -178,16 +176,9 @@ startButton.addEventListener('click', (e) => {
   binarySearch(array, target);
 })
 
-function testArrayGen(num) {
-  let i = 0;
-  let testArray = [];
-  while (i < num) {
-    testArray.push(i);
-    i++;
-  }
-  return testArray;
-}
+// Helper functions for algo visualization
 
+// Reads value of dropdown
 function selectBookToSearch() {
   const select = document.querySelector('#book-dropdown')
   let index;
@@ -199,6 +190,7 @@ function selectBookToSearch() {
   }
 }
 
+// Sets speed of algo visualization
 function selectSpeed(slider) {
   if (slider == 1) {
     return 1000;
@@ -209,18 +201,15 @@ function selectSpeed(slider) {
   }
 }
 
+// Displays book info after algo completes
 function displayInfo() {
   const result = document.querySelector('.result');
   result.classList.toggle('hidden')
 }
 
+// Event listeners inside book info
 const closeInfo = document.querySelector('#result-close');
-
 closeInfo.addEventListener('click', (e) => {
   e.preventDefault();
   displayInfo();
 })
-
-// Result functions
-
-// need to pop up a div that gives additional information about the selected book.
