@@ -187,3 +187,7 @@ function selectSpeed(slider) {
     return 250;
   }
 }
+
+// Result functions
+
+// need to pop up a div that gives additional information about the selected book.
