@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script defer src="./app.js"></script>
@@ -10,41 +13,134 @@
 </head>
 <body>
   <main>
-    <div id="grid-container">
-      <div class="side-one"></div>
-      <div class="side-two"></div>
-      <div class="shelf" id="s-one"></div>
-      <div class="shelf" id="s-two"></div>
-      <div class="shelf" id="s-three"></div>
-    </div>
-
-    <div class="hidden result">
-      <h1 class="book-title">Sample Title</h1>
-      <h4 class="author-name">Sample Author</h4>
-      <p class="book-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      <img src="" alt="Book Cover" class="img-placeholder">
-      <button id='result-close'>Close</button>
-    </div>
-
-    <nav>
-      <form class="nav-bar">
-        <button class="nav-item" id="start">Binary Visualistion Tool</button>
-        <button class="nav-item" id="generate-collection">Generate Collection</button>
-
-        <div class="custom-select">
-          <select class="nav-item" name="book-dropdown" id="book-dropdown">
-            <option value="" disabled selected>Select Book</option>
-          </select>
-          <span class="custom-arrow"></span>
-        </div>
-
-        <div class="nav-item">
-          <label for="adjust-speed">Adjust Speed</label>
-          <input type="range" id="adjust-speed" min="1" max="3" value="2" >
-        </div>
-        
-    </form>
-    </nav>
+      <div class="content">
+          <div class="sidebar sidebar-left">
+              <h1 class="book-title">Sample Title</h1>
+              <h4 class="author-name">Sample Author</h4>
+              <p class="book-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              <img src="" alt="Book Cover" class="img-placeholder">
+              <button id='result-close'>Close</button>
+          </div>
+          <div class="bookcase-grid">
+              <div class="book" id="i0"><p class="book-title"></p></div>
+              <div class="book" id="i1"><p class="book-title"></p></div>
+              <div class="book" id="i2"><p class="book-title"></p></div>
+              <div class="book" id="i3"><p class="book-title"></p></div>
+              <div class="book" id="i4"><p class="book-title"></p></div>
+              <div class="book" id="i5"><p class="book-title"></p></div>
+              <div class="book" id="i6"><p class="book-title"></p></div>
+              <div class="book" id="i7"><p class="book-title"></p></div>
+              <div class="book" id="i8"><p class="book-title"></p></div>
+              <div class="book" id="i9"><p class="book-title"></p></div>
+              <div class="book" id="i10"><p class="book-title"></p></div>
+              <div class="book" id="i11"><p class="book-title"></p></div>
+              <div class="book" id="i12"><p class="book-title"></p></div>
+              <div class="book" id="i13"><p class="book-title"></p></div>
+              <div class="book" id="i14"><p class="book-title"></p></div>
+              <div class="book" id="i15"><p class="book-title"></p></div>
+              <div class="book" id="i16"><p class="book-title"></p></div>
+              <div class="book" id="i17"><p class="book-title"></p></div>
+              <div class="book" id="i18"><p class="book-title"></p></div>
+              <div class="book" id="i19"><p class="book-title"></p></div>
+              <div class="book" id="i20"><p class="book-title"></p></div>
+              <div class="book" id="i21"><p class="book-title"></p></div>
+              <div class="book" id="i22"><p class="book-title"></p></div>
+              <div class="book" id="i23"><p class="book-title"></p></div>
+              <div class="book" id="i24"><p class="book-title"></p></div>
+              <div class="book" id="i25"><p class="book-title"></p></div>
+              <div class="book" id="i26"><p class="book-title"></p></div>
+              <div class="book" id="i27"><p class="book-title"></p></div>
+              <div class="book" id="i28"><p class="book-title"></p></div>
+              <div class="book" id="i29"><p class="book-title"></p></div>
+              <div class="book" id="i30"><p class="book-title"></p></div>
+              <div class="book" id="i31"><p class="book-title"></p></div>
+              <div class="book" id="i32"><p class="book-title"></p></div>
+              <div class="book" id="i33"><p class="book-title"></p></div>
+              <div class="book" id="i34"><p class="book-title"></p></div>
+              <div class="book" id="i35"><p class="book-title"></p></div>
+              <div class="book" id="i36"><p class="book-title"></p></div>
+              <div class="book" id="i37"><p class="book-title"></p></div>
+              <div class="book" id="i38"><p class="book-title"></p></div>
+              <div class="book" id="i39"><p class="book-title"></p></div>
+              <div class="book" id="i40"><p class="book-title"></p></div>
+              <div class="book" id="i41"><p class="book-title"></p></div>
+              <div class="book" id="i42"><p class="book-title"></p></div>
+              <div class="book" id="i43"><p class="book-title"></p></div>
+              <div class="book" id="i44"><p class="book-title"></p></div>
+              <div class="book" id="i45"><p class="book-title"></p></div>
+              <div class="book" id="i46"><p class="book-title"></p></div>
+              <div class="book" id="i47"><p class="book-title"></p></div>
+              <div class="book" id="i48"><p class="book-title"></p></div>
+              <div class="book" id="i49"><p class="book-title"></p></div>
+              <div class="book" id="i50"><p class="book-title"></p></div>
+              <div class="book" id="i51"><p class="book-title"></p></div>
+              <div class="book" id="i52"><p class="book-title"></p></div>
+              <div class="book" id="i53"><p class="book-title"></p></div>
+              <div class="book" id="i54"><p class="book-title"></p></div>
+              <div class="book" id="i55"><p class="book-title"></p></div>
+              <div class="book" id="i56"><p class="book-title"></p></div>
+              <div class="book" id="i57"><p class="book-title"></p></div>
+              <div class="book" id="i58"><p class="book-title"></p></div>
+              <div class="book" id="i59"><p class="book-title"></p></div>
+              <div class="book" id="i60"><p class="book-title"></p></div>
+              <div class="book" id="i61"><p class="book-title"></p></div>
+              <div class="book" id="i62"><p class="book-title"></p></div>
+              <div class="book" id="i63"><p class="book-title"></p></div>
+              <div class="book" id="i64"><p class="book-title"></p></div>
+              <div class="book" id="i65"><p class="book-title"></p></div>
+              <div class="book" id="i66"><p class="book-title"></p></div>
+              <div class="book" id="i67"><p class="book-title"></p></div>
+              <div class="book" id="i68"><p class="book-title"></p></div>
+              <div class="book" id="i69"><p class="book-title"></p></div>
+              <div class="book" id="i70"><p class="book-title"></p></div>
+              <div class="book" id="i71"><p class="book-title"></p></div>
+              <div class="book" id="i72"><p class="book-title"></p></div>
+              <div class="book" id="i73"><p class="book-title"></p></div>
+              <div class="book" id="i74"><p class="book-title"></p></div>
+              <div class="book" id="i75"><p class="book-title"></p></div>
+              <div class="book" id="i76"><p class="book-title"></p></div>
+              <div class="book" id="i77"><p class="book-title"></p></div>
+              <div class="book" id="i78"><p class="book-title"></p></div>
+              <div class="book" id="i79"><p class="book-title"></p></div>
+              <div class="book" id="i80"><p class="book-title"></p></div>
+              <div class="book" id="i81"><p class="book-title"></p></div>
+              <div class="book" id="i82"><p class="book-title"></p></div>
+              <div class="book" id="i83"><p class="book-title"></p></div>
+              <div class="book" id="i84"><p class="book-title"></p></div>
+              <div class="book" id="i85"><p class="book-title"></p></div>
+              <div class="book" id="i86"><p class="book-title"></p></div>
+              <div class="book" id="i87"><p class="book-title"></p></div>
+              <div class="book" id="i88"><p class="book-title"></p></div>
+              <div class="book" id="i89"><p class="book-title"></p></div>
+              <div class="book" id="i90"><p class="book-title"></p></div>
+              <div class="book" id="i91"><p class="book-title"></p></div>
+              <div class="book" id="i92"><p class="book-title"></p></div>
+              <div class="book" id="i93"><p class="book-title"></p></div>
+              <div class="book" id="i94"><p class="book-title"></p></div>
+              <div class="book" id="i95"><p class="book-title"></p></div>
+          </div>
+          <div class="sidebar sidebar-right">
+              <!-- <h1 class="book-title">Sample Title</h1>
+              <h4 class="author-name">Sample Author</h4>
+              <p class="book-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              <img src="" alt="Book Cover" class="img-placeholder">
+              <button id='result-close'>Close</button> -->
+          </div>
+      </div>
+      <div class="key"></div>
+      <footer>
+          <a href="#" class="title nav">Binary Search Visualization</a>
+          <div class="select nav">
+              <select name="book-dropdown" id="book-dropdown">
+                  <option value="" disabled selected>Select Book</option>
+              </select>
+              <input type="button" value="Search!" id="start">
+          </div>
+          <div class="speed nav">
+              <label for="adjust-speed">Adjust Speed</label>
+              <input type="range" id="adjust-speed" min="1" max="3" value="2" >
+          </div>
+      </footer>
   </main>
 </body>
 </html>
