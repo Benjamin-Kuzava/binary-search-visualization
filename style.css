@@ -1,12 +1,14 @@
 :root { 
-  --clr-lightcolor: rgb(251, 242, 192);
-  --clr-brownlight: rgb(72, 57, 42);
-  --clr-browndark: rgb(67, 40, 28);
-  --clr-redlight: rgb(249, 111, 93);
-  --clr-reddark: rgb(192, 110, 82);
+  --clr-light: rgb(249, 157, 120);
   --clr-white: whitesmoke;
-  --ff-serif: 'Crimson Text', serif;
-  --ff-sans: 'Ubuntu', sans-serif;
+  --clr-background: whitesmoke;
+  --clr-lightgray: rgb(109, 128, 145);
+  --clr-midgray: rgb(53, 82, 101);
+  --clr-darkgray: rgb(42, 64, 76);
+  --clr-dark: rgb(28, 39, 43);
+
+  --serif: 'Libre Baskerville', serif;
+  --sans-serif:'Nunito', sans-serif
 }
 
 * {
