@@ -9,7 +9,7 @@ async function getBooks(subject) {
   try {
     const url = `http://openlibrary.org/subjects/${subject}.json?limit=96`;
     const responses = await axios.get(url);
-    console.log(responses)
+    // console.log(responses);
     subjectArray = [...responses.data.works];
     subjectArray.sort((a, b) => {
       return (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0);
@@ -26,7 +26,7 @@ getBooks('literature');
 // Grab book description
 async function bookSummary(key) {
   try {
-    const url = `https://openlibrary.org${key}.json`
+    const url = `https://openlibrary.org${key}.json`;
     const responses = await axios.get(url);
     const description = responses.data.description.value;
     // console.log(description);
@@ -61,7 +61,7 @@ function shortedTitle(title, length) {
     if (title.length === length || title.length < length) {
       return `${title}`;
     } else if (title.match(/^The/)) {
-      return `${title.slice(4, length + 3)}`
+      return `${title.slice(4, length + 3)}`;
     } else {
       return `${title.slice(0, length)}`;
     }
@@ -78,7 +78,7 @@ beginSearch.addEventListener('click', (e) => {
   })
 
   function binarySearch(array, target) {
-    return searchHelper(array, target, 0, array.length - 1)
+    return searchHelper(array, target, 0, array.length - 1);
   }
 
   function searchHelper(array, target, left, right) {
@@ -98,23 +98,23 @@ beginSearch.addEventListener('click', (e) => {
       potentialBook.style.backgroundColor = 'green';
       setTimeout(() => {
         potentialBook.style.backgroundColor = 'rgb(249, 157, 120)';
-      }, 1000)
+      }, 1000);
       getCover(subjectArray[mid]['cover_id']);
       populateBookInfo(mid);
       setTimeout(() => {
         displayInfo();
-      }, 750)
+      }, 750);
       return mid;
       // ^Note: here, it should return a function to open a div and display info
     } else if (target < potentialMatch) {
       setTimeout(() => {
         rightBook.style.backgroundColor = 'rgb(249, 157, 120)';
-        return searchHelper(array, target, left, mid - 1)
+        return searchHelper(array, target, left, mid - 1);
       }, speed);
     } else {
       setTimeout(() => {
         leftBook.style.backgroundColor = 'rgb(249, 157, 120)';
-        return searchHelper(array, target, mid + 1, right)
+        return searchHelper(array, target, mid + 1, right);
       }, speed);
     }
   }
@@ -134,7 +134,7 @@ function arrayGeneration(num) {
 
 // Reads value of dropdown
 function selectBookToSearch() {
-  const select = document.querySelector('#book-dropdown')
+  const select = document.querySelector('#book-dropdown');
   let index;
   for (let i = 0; i < subjectArray.length; i++) {
     if(subjectArray[i].title === select.value) {
@@ -149,7 +149,7 @@ function selectSpeed(slider) {
   if (slider == 1) {
     return 1000;
   } else if (slider == 2) {
-    return 500
+    return 500;
   } else {
     return 250;
   }
@@ -158,13 +158,13 @@ function selectSpeed(slider) {
 
 
 
-// // Displays book info after algo completes
+// Displays book info after algo completes
 function displayInfo() {
   const result = document.querySelector('.result');
-  result.classList.toggle('hidden')
+  result.classList.toggle('hidden');
 }
 
-// // Event listeners inside book info
+// Event listeners inside book info
 const closeInfo = document.querySelector('#result-close');
   closeInfo.addEventListener('click', (e) => {
     e.preventDefault();
@@ -174,9 +174,9 @@ const closeInfo = document.querySelector('#result-close');
   function getCover(id) {
     const imgPlaceholder = document.querySelector('.img-placeholder');
     if (id === null) {
-      imgPlaceholder.src = 'assets/wp404error.jpg'
+      imgPlaceholder.src = 'assets/wp404error.jpg';
     } else {
-      imgPlaceholder.src = `http://covers.openlibrary.org/b/id/${id}-L.jpg`
+      imgPlaceholder.src = `http://covers.openlibrary.org/b/id/${id}-L.jpg`;
     }
 } 
  
@@ -194,6 +194,26 @@ function populateBookInfo(index) {
 function disableButton(button, time) {
   button.disabled = true;
   setTimeout(() => {
-    button.disabled = false
+    button.disabled = false;
   }, time)
+}
+
+// Alternate select for search
+const books = document.querySelectorAll(".book-title");
+
+books.forEach(book => {
+  book.addEventListener('click', (e) => {
+    const selection = e.target.parentElement;
+    selection.classList.toggle('selected');
+    getIndex(selection);
+    setTimeout(() => {
+      selection.classList.toggle('selected');
+    }, 1000)
+  })
+})
+
+function getIndex(selection) {
+  let index = selection.id.slice(1);
+  const option = document.querySelector(`option[value="${subjectArray[index]['title']}"]`);
+  document.querySelector('#book-dropdown').value = option.value;
 }

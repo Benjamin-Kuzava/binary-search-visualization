@@ -30,17 +30,12 @@ main {
   position: relative;
 }
 
-.content {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 1;
-}
 
 .bookcase-grid {
   display: flex;
   flex-wrap: wrap;
   padding-left: .2em;
-  width: 80%;
+  width: 33%;
   margin: 0 auto;
   border-left: 2em solid var(--clr-dark);
   border-right: 2em solid var(--clr-dark);
@@ -60,16 +55,6 @@ main {
   cursor: pointer;
 }
 
-@keyframes enterFromTop {
-  0% {
-      transform: translateY(-100%);
-  }
-  100% {
-      transform: translateY(0);
-  }
-}
-
-
 .book .book-title {
   text-transform: capitalize;
   margin: .4em -.4em;
@@ -80,6 +65,11 @@ main {
   font-family: var(--serif);
   font-size: 1em;
   /* font-weight: bold; */
+}
+
+.selected {
+  background-color: var(--clr-midgray);
+  color: var(--clr-white);
 }
 
 .key {
@@ -168,7 +158,7 @@ select {
   grid-area: button;
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1300px) {
   .bookcase-grid {
       width: 70%;
   }
