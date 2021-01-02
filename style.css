@@ -50,7 +50,7 @@ main {
   width: 2.5rem;
   height: 4.1rem;
   border-radius: 2px;
-  margin: .6rem .1em;
+  margin: .6rem .45em;
   color: var(--clr-dark);
   cursor: pointer;
 }
@@ -81,6 +81,42 @@ main {
   border-top-right-radius: 10px;
   display: flex;
   justify-content: center;
+  padding: .5em;
+}
+
+/* Hover effects: https://www.youtube.com/watch?v=ceNMP-aQkQ4&t=740s */
+.button {
+  cursor: pointer;
+  border: 0;
+  padding: .5em 1em;
+  font-variant: small-caps;
+  font-size: 1.2em;
+  font-weight: bolder;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, .6);
+  position: relative;
+  z-index: 1;
+  background-color: var(--clr-white);
+  color: black;
+  border-radius: 10px;
+}
+
+.button::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(249, 157, 120, .9);
+  z-index: -1;
+  transform: scale(0);
+  transition: transform 200ms ease-in;
+  border-radius: 10px;
+}
+
+.button:hover::after {
+  transform: scale(1);
+  border-radius: 10px;
 }
 
 footer {
@@ -101,6 +137,7 @@ label {
   font-size: 1.5rem;
   color: var(--clr-white);
   font-weight: bolder;
+  
 }
 
 .title:hover {
@@ -121,6 +158,7 @@ select {
   border: 1px solid var(--clr-white);
   border-radius: 10px;
   cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, .6);
 }
 
 select:hover {
