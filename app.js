@@ -90,14 +90,16 @@ beginSearch.addEventListener('click', (e) => {
     let speed = selectSpeed(document.querySelector('#adjust-speed').value);
     
     if (left > right) return -1;
-    leftBook.style.backgroundColor = 'gold';
-    rightBook.style.backgroundColor = 'gold';
+    leftBook.classList.add('leftBound');
+    rightBook.classList.add('rightBound');
+    potentialBook.classList.add('mid');
     if (target === potentialMatch) {
-      leftBook.style.backgroundColor = 'rgb(249, 157, 120)';
-      rightBook.style.backgroundColor = 'rgb(249, 157, 120)';
-      potentialBook.style.backgroundColor = 'green';
+      leftBook.classList.remove('leftBound');
+      rightBook.classList.remove('rightBound');
+      potentialBook.classList.remove('mid');
+      potentialBook.classList.add('match');
       setTimeout(() => {
-        potentialBook.style.backgroundColor = 'rgb(249, 157, 120)';
+      potentialBook.classList.remove('match');
       }, 1000);
       getCover(subjectArray[mid]['cover_id']);
       populateBookInfo(mid);
@@ -108,12 +110,14 @@ beginSearch.addEventListener('click', (e) => {
       // ^Note: here, it should return a function to open a div and display info
     } else if (target < potentialMatch) {
       setTimeout(() => {
-        rightBook.style.backgroundColor = 'rgb(249, 157, 120)';
+        rightBook.classList.remove('rightBound');
+        potentialBook.classList.remove('mid');
         return searchHelper(array, target, left, mid - 1);
       }, speed);
     } else {
       setTimeout(() => {
-        leftBook.style.backgroundColor = 'rgb(249, 157, 120)';
+        leftBook.classList.remove('leftBound');
+        potentialBook.classList.remove('mid');
         return searchHelper(array, target, mid + 1, right);
       }, speed);
     }

@@ -67,6 +67,10 @@ main {
   /* font-weight: bold; */
 }
 
+.book:hover {
+  transform: scale(1.1);
+}
+
 .selected {
   background-color: var(--clr-midgray);
   color: var(--clr-white);
@@ -89,9 +93,9 @@ main {
   cursor: pointer;
   border: 0;
   padding: .5em 1em;
-  font-variant: small-caps;
   font-size: 1.2em;
   font-weight: bolder;
+  font-variant: small-caps;
   box-shadow: 0 10px 25px rgba(0, 0, 0, .6);
   position: relative;
   z-index: 1;
@@ -107,16 +111,20 @@ main {
   height: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(249, 157, 120, .9);
+  background-color: rgba(109, 128, 145, .9);
   z-index: -1;
   transform: scale(0);
-  transition: transform 200ms ease-in;
+  transition: transform 100ms ease-in;
   border-radius: 10px;
 }
 
 .button:hover::after {
   transform: scale(1);
   border-radius: 10px;
+}
+
+.button:hover {
+  color: white;
 }
 
 footer {
@@ -250,6 +258,20 @@ select:hover {
 
 #result-close {
   grid-area: button;
+}
+
+/* Search Visualization CSS */
+.rightBound,
+.leftBound {
+  background-color: var(--clr-lightgray);
+}
+
+.mid{
+  background-color: var(--clr-midgray);
+}
+
+.match {
+  background-color: goldenrod;
 }
 
 @media only screen and (max-width: 1300px) {
