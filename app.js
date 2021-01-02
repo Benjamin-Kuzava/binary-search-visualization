@@ -198,7 +198,8 @@ function disableButton(button, time) {
   }, time)
 }
 
-// Alternate select for search
+// Alternate way to select dropdown
+// Add event listener to multiple divs: https://flaviocopes.com/how-to-add-event-listener-multiple-elements-javascript/
 const books = document.querySelectorAll(".book-title");
 
 books.forEach(book => {
@@ -212,6 +213,7 @@ books.forEach(book => {
   })
 })
 
+// Set dropdown to correct option by extracting index from div id
 function getIndex(selection) {
   let index = selection.id.slice(1);
   const option = document.querySelector(`option[value="${subjectArray[index]['title']}"]`);

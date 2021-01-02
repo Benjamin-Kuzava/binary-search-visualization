@@ -122,15 +122,17 @@
               <div class="book" id="i95"><p class="book-title"></p></div>
           </div>
       </div>
-      <div class="key"></div>
+      <div class="key">
+        <input type="button" value="Search!" id="start">
+      </div>
       <footer>
           <a href="#" class="title nav">Binary Search Visualization</a>
           <div class="select nav">
               <select name="book-dropdown" id="book-dropdown">
                   <option value="" disabled selected>Select Book</option>
               </select>
-              <input type="button" value="Search!" id="start">
-          </div>
+              <span class="custom-arrow"></span>
+            </div>
           <div class="speed nav">
               <label for="adjust-speed">Adjust Speed</label>
               <input type="range" id="adjust-speed" min="1" max="3" value="2" >
