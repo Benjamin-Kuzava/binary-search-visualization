@@ -1,4 +1,4 @@
-// Base Search URL: http://openlibrary.org/subjects/${subject}.json?limit=87
+// Base Search URL: http://openlibrary.org/subjects/${subject}.json?limit=96
 // Base Img URL: http://covers.openlibrary.org/b/id/${id}-L.jpg
 
 // API Requests
@@ -7,14 +7,14 @@ let subjectArray = [];
 // Grab array of book objects from API
 async function getBooks(subject) {
   try {
-    const url = `http://openlibrary.org/subjects/${subject}.json?limit=87`;
+    const url = `http://openlibrary.org/subjects/${subject}.json?limit=96`;
     const responses = await axios.get(url);
     subjectArray = [...responses.data.works];
     subjectArray.sort((a, b) => {
       return (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0);
     });
-    // console.log(subjectArray);
     bookOption(subjectArray);
+    assignBook(subjectArray, 5);
     return subjectArray;
   } catch (error) {
     console.log(error);
@@ -33,125 +33,91 @@ function bookOption(subjectArray) {
   });
 }
 
-// Event Listener for generating collection
-const generateCollection = document.querySelector('#generate-collection');
-generateCollection.addEventListener('click', (e) => {
+// Assign each book to corresponding book div
+function assignBook(array, length) {
+  for (let i = 0; i < array.length; i++) {
+      let shortened = shortedTitle(array[i]['title'], length);
+      let bookDiv = document.querySelector(`#i${i}`);
+      bookDiv.lastChild.textContent = `${shortened}`;
+  }
+  
+}
+
+// Shorten title to fit inside div
+function shortedTitle(title, length) {
+    if (title.length === length || title.length < length) {
+      return `${title}`;
+    } else if (title.match(/^The/)) {
+      return `${title.slice(4, length + 3)}`
+    } else {
+      return `${title.slice(0, length)}`;
+    }
+  }
+
+// Binary Search
+const beginSearch = document.querySelector('#start');
+
+beginSearch.addEventListener('click', (e) => {
   e.preventDefault();
-  clearBooks();
-  generateBooks(87);
-})
-
-// Generate collection
-function generateBooks(num) {
-  const generateCollection = document.querySelector('#generate-collection');
-  disableButton(generateCollection, 2500);
-  let columnPosition = 0; 
-  for (let i = 0; i < num; i++) {
-    setTimeout(() => {
-      const gridContainer = document.querySelector('#grid-container')
-      const bookDiv = document.createElement('div');
-      // let shortened = shortedTitle(subjectArray[i]['title']);
-      const img = document.createElement('img')
-
-      bookDiv.classList.add('book')
-      bookDiv.setAttribute("id", `i${i}`);
-      bookDiv.style.backgroundImage = `url(http://covers.openlibrary.org/b/id/${subjectArray[i]['cover_id']}-L.jpg)`
-      // bookDiv.textContent = `${shortened}`;
-
-      // If i has reached column limit, reset column counter 
-      if (i == Math.floor(num * (2 / 3)) || i == Math.floor(num * (1 / 3))) {
-        columnPosition = 0;
-      }
-      bookDiv.style.gridColumn = columnPosition + 4;
-
-      // If a shelf has filled, move to next shelf
-      if (i >= num * (2 / 3)) {
-        bookDiv.style.gridRow = 18;
-      } else if (i >= num * (1 / 3)) {
-        bookDiv.style.gridRow = 13;
-      } else {
-        bookDiv.style.gridRow = 8;
-      }
-      gridContainer.append(bookDiv);
-      columnPosition++;
-    }, 25*i);
-  }
-}
-
-// Helper functions for generating collection
-
-// Adjust title for book div
-function shortedTitle(title) {
-  if (title.length === 4) {
-    return `${title}`
-  } else {
-    return `${title.slice(0, 4)}...`;
-  }
-  // Adjust later to check if the slice ends with a space
-}
-
-// Clear books before re-generating collection
-function clearBooks() {
-  const gridContainer = document.getElementById('grid-container');
-  while (gridContainer.childNodes.length > 11) {
-    gridContainer.removeChild(gridContainer.lastChild);
-  }
-}
-
-// Algo Visualization
-
-// Event listener for algo visualization
-  // Might clean this up by pulling out the algo as its own function
-const startButton = document.querySelector('#start')
-startButton.addEventListener('click', (e) => {
-  e.preventDefault();
-  const array = arrayGeneration(87);
-  let slider = document.querySelector('#adjust-speed').value;
-  let speed = selectSpeed(slider);
+  const array = arrayGeneration(subjectArray.length);
   let target = selectBookToSearch();
+  binarySearch(array, target);
+  })
+
   function binarySearch(array, target) {
-    return searchHelper(array, target, 0, array.length - 1);
+    return searchHelper(array, target, 0, array.length - 1)
   }
+
   function searchHelper(array, target, left, right) {
-    if (left > right) return -1;
     const mid = Math.floor((left + right) / 2);
     const potentialMatch = array[mid];
     let leftBook = document.querySelector(`#i${array[left]}`);
     let rightBook = document.querySelector(`#i${array[right]}`);
     let potentialBook = document.querySelector(`#i${array[mid]}`);
-
+    let speed = selectSpeed(document.querySelector('#adjust-speed').value);
+    
+    if (left > right) return -1;
     leftBook.style.backgroundColor = 'gold';
     rightBook.style.backgroundColor = 'gold';
     if (target === potentialMatch) {
-      leftBook.style.backgroundColor = 'rgb(249, 111, 93)';
-      rightBook.style.backgroundColor = 'rgb(249, 111, 93)';
+      leftBook.style.backgroundColor = 'rgb(249, 157, 120)';
+      rightBook.style.backgroundColor = 'rgb(249, 157, 120)';
       potentialBook.style.backgroundColor = 'green';
       setTimeout(() => {
-        potentialBook.style.backgroundColor = 'rgb(249, 111, 93)';
+        potentialBook.style.backgroundColor = 'rgb(249, 157, 120)';
       }, 1000)
-      getCover(subjectArray[mid]['cover_id']);
-      populateBookInfo(mid);
-      setTimeout(() => {
-        displayInfo();
-      }, 750)
+      // getCover(subjectArray[mid]['cover_id']);
+      // populateBookInfo(mid);
+      // setTimeout(() => {
+      //   displayInfo();
+      // }, 750)
       return mid;
       // ^Note: here, it should return a function to open a div and display info
     } else if (target < potentialMatch) {
       setTimeout(() => {
-        rightBook.style.backgroundColor = 'rgb(249, 111, 93)';
+        rightBook.style.backgroundColor = 'rgb(249, 157, 120)';
         return searchHelper(array, target, left, mid - 1)
       }, speed);
     } else {
       setTimeout(() => {
-        leftBook.style.backgroundColor = 'rgb(249, 111, 93)';
+        leftBook.style.backgroundColor = 'rgb(249, 157, 120)';
         return searchHelper(array, target, mid + 1, right)
       }, speed);
     }
   }
-  binarySearch(array, target);
-})
+
 
 // Helper functions for algo visualization
+
+function arrayGeneration(num) {
+  let result = [];
+  let i = 0;
+  while (i < num) {
+    result.push(i);
+    i++;
+  }
+  return result;
+}
 
 // Reads value of dropdown
 function selectBookToSearch() {
@@ -176,50 +142,41 @@ function selectSpeed(slider) {
   }
 }
 
-// Displays book info after algo completes
-function displayInfo() {
-  const result = document.querySelector('.result');
-  result.classList.toggle('hidden')
-}
-
-// Event listeners inside book info
-const closeInfo = document.querySelector('#result-close');
-  closeInfo.addEventListener('click', (e) => {
-    e.preventDefault();
-    displayInfo();
-  });
 
 
-  function arrayGeneration(num) {
-    let result = [];
-    let i = 0;
-    while (i < num) {
-      result.push(i);
-      i++;
-    }
-    return result;
-  }
 
+// // Displays book info after algo completes
+// function displayInfo() {
+//   const result = document.querySelector('.result');
+//   result.classList.toggle('hidden')
+// }
 
-  function getCover(id) {
-    const imgPlaceholder = document.querySelector('.img-placeholder');
-    if (id === null) {
-      imgPlaceholder.src = 'assets/wp404error.jpg'
-    } else {
-      imgPlaceholder.src = `http://covers.openlibrary.org/b/id/${id}-L.jpg`
-    }
-} 
+// // Event listeners inside book info
+// const closeInfo = document.querySelector('#result-close');
+//   closeInfo.addEventListener('click', (e) => {
+//     e.preventDefault();
+//     displayInfo();
+//   });
+
+//   function getCover(id) {
+//     const imgPlaceholder = document.querySelector('.img-placeholder');
+//     if (id === null) {
+//       imgPlaceholder.src = 'assets/wp404error.jpg'
+//     } else {
+//       imgPlaceholder.src = `http://covers.openlibrary.org/b/id/${id}-L.jpg`
+//     }
+// } 
  
-// Add content to book info div
-function populateBookInfo(index) {
-  // const imgPlaceholder = document.querySelector('.img-placeholder');
-  const bookTitle = document.querySelector('.book-title');
-  const AuthorName = document.querySelector('.author-name');
-  // const bookContent = document.querySelector('.book-content');
+// // Add content to book info div
+// function populateBookInfo(index) {
+//   // const imgPlaceholder = document.querySelector('.img-placeholder');
+//   const bookTitle = document.querySelector('.book-title');
+//   const AuthorName = document.querySelector('.author-name');
+//   // const bookContent = document.querySelector('.book-content');
 
-  bookTitle.textContent = subjectArray[index]['title'];
-  AuthorName.textContent = subjectArray[index].authors[0]['name'];
-}
+//   bookTitle.textContent = subjectArray[index]['title'];
+//   AuthorName.textContent = subjectArray[index].authors[0]['name'];
+// }
 
 // Disable buttons after click
 function disableButton(button, time) {
