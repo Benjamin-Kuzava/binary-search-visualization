@@ -9,6 +9,7 @@ async function getBooks(subject) {
   try {
     const url = `http://openlibrary.org/subjects/${subject}.json?limit=96`;
     const responses = await axios.get(url);
+    console.log(responses)
     subjectArray = [...responses.data.works];
     subjectArray.sort((a, b) => {
       return (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0);
@@ -21,6 +22,18 @@ async function getBooks(subject) {
   }
 }
 getBooks('literature');
+
+// Grab book description
+async function bookSummary(key) {
+  try {
+    const url = `https://openlibrary.org${key}.json`
+    const responses = await axios.get(url);
+    const description = responses.data.description.value;
+    // console.log(description);
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 // Append book titles to dropdown
 function bookOption(subjectArray) {
@@ -86,11 +99,11 @@ beginSearch.addEventListener('click', (e) => {
       setTimeout(() => {
         potentialBook.style.backgroundColor = 'rgb(249, 157, 120)';
       }, 1000)
-      // getCover(subjectArray[mid]['cover_id']);
-      // populateBookInfo(mid);
-      // setTimeout(() => {
-      //   displayInfo();
-      // }, 750)
+      getCover(subjectArray[mid]['cover_id']);
+      populateBookInfo(mid);
+      setTimeout(() => {
+        displayInfo();
+      }, 750)
       return mid;
       // ^Note: here, it should return a function to open a div and display info
     } else if (target < potentialMatch) {
@@ -146,37 +159,36 @@ function selectSpeed(slider) {
 
 
 // // Displays book info after algo completes
-// function displayInfo() {
-//   const result = document.querySelector('.result');
-//   result.classList.toggle('hidden')
-// }
+function displayInfo() {
+  const result = document.querySelector('.result');
+  result.classList.toggle('hidden')
+}
 
 // // Event listeners inside book info
-// const closeInfo = document.querySelector('#result-close');
-//   closeInfo.addEventListener('click', (e) => {
-//     e.preventDefault();
-//     displayInfo();
-//   });
+const closeInfo = document.querySelector('#result-close');
+  closeInfo.addEventListener('click', (e) => {
+    e.preventDefault();
+    displayInfo();
+  });
 
-//   function getCover(id) {
-//     const imgPlaceholder = document.querySelector('.img-placeholder');
-//     if (id === null) {
-//       imgPlaceholder.src = 'assets/wp404error.jpg'
-//     } else {
-//       imgPlaceholder.src = `http://covers.openlibrary.org/b/id/${id}-L.jpg`
-//     }
-// } 
+  function getCover(id) {
+    const imgPlaceholder = document.querySelector('.img-placeholder');
+    if (id === null) {
+      imgPlaceholder.src = 'assets/wp404error.jpg'
+    } else {
+      imgPlaceholder.src = `http://covers.openlibrary.org/b/id/${id}-L.jpg`
+    }
+} 
  
-// // Add content to book info div
-// function populateBookInfo(index) {
-//   // const imgPlaceholder = document.querySelector('.img-placeholder');
-//   const bookTitle = document.querySelector('.book-title');
-//   const AuthorName = document.querySelector('.author-name');
-//   // const bookContent = document.querySelector('.book-content');
+// Add content to book info div
+function populateBookInfo(index) {
+  const bookTitle = document.querySelector('#book-title');
+  const AuthorName = document.querySelector('.author-name');
+  // const bookContent = document.querySelector('.book-content');
 
-//   bookTitle.textContent = subjectArray[index]['title'];
-//   AuthorName.textContent = subjectArray[index].authors[0]['name'];
-// }
+  bookTitle.textContent = subjectArray[index]['title'];
+  AuthorName.textContent = subjectArray[index].authors[0]['name'];
+}
 
 // Disable buttons after click
 function disableButton(button, time) {

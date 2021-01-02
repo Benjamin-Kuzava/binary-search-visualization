@@ -10,7 +10,7 @@
   --sans-serif:'Nunito', sans-serif
 }
 
-*:after, *:before {
+*, *:after, *:before {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -26,6 +26,8 @@ main {
   flex-direction: column;
   justify-content: flex-end;
   height: 100vh;
+
+  position: relative;
 }
 
 .content {
@@ -42,7 +44,7 @@ main {
   margin: 0 auto;
   border-left: 2em solid var(--clr-dark);
   border-right: 2em solid var(--clr-dark);
-  background-image: linear-gradient(var(--clr-background), var(--clr-background) 4.3rem, 
+  background-image: linear-gradient(var(--clr-white), var(--clr-white) 4.3rem, 
                                   rgba(28, 39, 43, .7) 4.3rem, rgba(28, 39, 43, .9) 4.8rem, 
                                     var(--clr-dark) 4.9rem, var(--clr-dark) 5.3rem);
   background-size: 10px 5.3rem;
@@ -68,7 +70,7 @@ main {
 }
 
 
-.book-title {
+.book .book-title {
   text-transform: capitalize;
   margin: .4em -.4em;
   font-size: 1rem;
@@ -104,24 +106,66 @@ footer {
 .title,
 label {
   text-decoration: none;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   color: var(--clr-white);
+  font-weight: bolder;
+}
+
+.title:hover {
+  color: var(--clr-light);
 }
 
 select {
   min-width: 266px;
 }
 
-.sidebar-left {
+.result {
   display: grid;
-  grid-template-columns: 5;
-  grid-template-rows: 5;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-areas: 
+  "img img title title title"
+  "img img name . ."
+  "img img desc desc desc"
+  "img img desc desc desc"
+  "img img . button button";
 
-  width: 30%;
-  height: 50%;
-  margin-left: 3rem;
+  width: 50%;
+  height: 80%;
   border: 2px solid var(--clr-dark);
   border-radius: 10px;
+  background-color: var(--clr-white);
+  z-index: 1;
+  position: absolute;
+  align-self: center;
+  margin-bottom: 9em;
+}
+
+.hidden {
+  display: none;
+}
+
+#book-title {
+  grid-area: title;
+  font-variant: small-caps;
+}
+
+.author-name {
+  grid-area: name;
+}
+
+.book-content {
+  grid-area: desc;
+}
+
+.img-placeholder {
+  grid-area: img;
+  margin: 1em;
+  border: 1px solid var(--clr-dark);
+}
+
+#result-close {
+  grid-area: button;
 }
 
 @media only screen and (max-width: 1200px) {
