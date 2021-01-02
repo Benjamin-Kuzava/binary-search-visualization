@@ -68,6 +68,9 @@ function shortedTitle(title, length) {
   }
 
 // Binary Search
+  // sleep() in js = https://medium.com/dev-genius/how-to-make-javascript-sleep-or-wait-d95d33c99909
+const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
+
 const beginSearch = document.querySelector('#start');
 
 beginSearch.addEventListener('click', (e) => {
@@ -77,51 +80,99 @@ beginSearch.addEventListener('click', (e) => {
   binarySearch(array, target);
   })
 
-  function binarySearch(array, target) {
-    return searchHelper(array, target, 0, array.length - 1);
-  }
 
-  function searchHelper(array, target, left, right) {
-    const mid = Math.floor((left + right) / 2);
-    const potentialMatch = array[mid];
-    let leftBook = document.querySelector(`#i${array[left]}`);
-    let rightBook = document.querySelector(`#i${array[right]}`);
-    let potentialBook = document.querySelector(`#i${array[mid]}`);
-    let speed = selectSpeed(document.querySelector('#adjust-speed').value);
-    
-    if (left > right) return -1;
-    leftBook.classList.add('leftBound');
-    rightBook.classList.add('rightBound');
-    potentialBook.classList.add('mid');
-    if (target === potentialMatch) {
-      leftBook.classList.remove('leftBound');
-      rightBook.classList.remove('rightBound');
-      potentialBook.classList.remove('mid');
-      potentialBook.classList.add('match');
-      setTimeout(() => {
-      potentialBook.classList.remove('match');
-      }, 1000);
-      getCover(subjectArray[mid]['cover_id']);
-      populateBookInfo(mid);
-      setTimeout(() => {
-        displayInfo();
-      }, 750);
-      return mid;
-      // ^Note: here, it should return a function to open a div and display info
-    } else if (target < potentialMatch) {
-      setTimeout(() => {
-        rightBook.classList.remove('rightBound');
-        potentialBook.classList.remove('mid');
-        return searchHelper(array, target, left, mid - 1);
-      }, speed);
-    } else {
-      setTimeout(() => {
-        leftBook.classList.remove('leftBound');
-        potentialBook.classList.remove('mid');
-        return searchHelper(array, target, mid + 1, right);
-      }, speed);
+function binarySearch(array, target) {
+    return binarySearchHelper(array, target, 0, array.length - 1);
+}
+
+async function binarySearchHelper(array, target, left, right) {
+    while (left <= right) {
+        const mid = Math.floor((left + right) / 2);
+        const potentialMatch = array[mid];
+        let leftBook = document.querySelector(`#i${array[left]}`);
+        let rightBook = document.querySelector(`#i${array[right]}`);
+        let potentialBook = document.querySelector(`#i${array[mid]}`);
+
+        leftBook.classList.add('leftBound');
+        rightBook.classList.add('rightBound');
+        await sleep(1000);
+        potentialBook.classList.add('mid');
+        if (target === potentialMatch) {
+            await sleep(1000);
+            potentialBook.classList.remove('mid');
+            potentialBook.classList.add('match');
+            leftBook.classList.remove('leftBound');
+            rightBook.classList.remove('rightBound');
+            await sleep(1000);
+            potentialBook.classList.remove('match');
+            // getCover(subjectArray[mid]['cover_id']);
+            // populateBookInfo(mid);
+            // setTimeout(() => {
+            //   displayInfo();
+            // }, 750);
+            return mid;
+        } else if (target < potentialMatch) {
+          await sleep(1000);
+          rightBook.classList.remove('rightBound');
+          right = mid - 1;
+          setTimeout(() => {
+            potentialBook.classList.remove('mid');
+          }, 1000);
+        } else {
+          await sleep(1000);
+          leftBook.classList.remove('leftBound');
+          left = mid + 1;
+          potentialBook.classList.remove('mid');
+        }
     }
-  }
+    return -1;
+}
+
+  // function binarySearch(array, target) {
+  //   return searchHelper(array, target, 0, array.length - 1);
+  // }
+
+  // function searchHelper(array, target, left, right) {
+  //   const mid = Math.floor((left + right) / 2);
+  //   const potentialMatch = array[mid];
+  //   let leftBook = document.querySelector(`#i${array[left]}`);
+  //   let rightBook = document.querySelector(`#i${array[right]}`);
+  //   let potentialBook = document.querySelector(`#i${array[mid]}`);
+  //   let speed = selectSpeed(document.querySelector('#adjust-speed').value);
+    
+  //   if (left > right) return -1;
+  //   leftBook.classList.add('leftBound');
+  //   rightBook.classList.add('rightBound');
+  //   potentialBook.classList.add('mid');
+  //   if (target === potentialMatch) {
+  //     leftBook.classList.remove('leftBound');
+  //     rightBook.classList.remove('rightBound');
+  //     potentialBook.classList.remove('mid');
+  //     potentialBook.classList.add('match');
+  //     setTimeout(() => {
+  //     potentialBook.classList.remove('match');
+  //     }, 1000);
+  //     getCover(subjectArray[mid]['cover_id']);
+  //     populateBookInfo(mid);
+  //     setTimeout(() => {
+  //       displayInfo();
+  //     }, 750);
+  //     return mid;
+  //     // ^Note: here, it should return a function to open a div and display info
+  //   } else if (target < potentialMatch) {
+  //     setTimeout(() => {
+  //       rightBook.classList.remove('rightBound');
+  //       potentialBook.classList.remove('mid');
+  //       return searchHelper(array, target, left, mid - 1);
+  //     }, speed);
+  //   } else {
+  //     setTimeout(() => {
+  //       leftBook.classList.remove('leftBound');
+  //       potentialBook.classList.remove('mid');
+  //       return searchHelper(array, target, mid + 1, right);
+  //     }, speed);
+  //   }
+  // }
 
 
 // Helper functions for algo visualization
