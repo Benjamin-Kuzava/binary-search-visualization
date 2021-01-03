@@ -93,11 +93,15 @@ async function binarySearchHelper(array, target, left, right) {
         let rightBook = document.querySelector(`#i${array[right]}`);
         let potentialBook = document.querySelector(`#i${array[mid]}`);
         let speed = selectSpeed();
+        document.querySelector('.midpoint').textContent = ``;
+        document.querySelector('.low').textContent = `${left}`;
+        document.querySelector('.high').textContent = `${right}`;
 
         leftBook.classList.add('leftBound');
         rightBook.classList.add('rightBound');
         await sleep(speed);
         potentialBook.classList.add('mid');
+        document.querySelector('.midpoint').textContent = `${mid}`;
         if (target === potentialMatch) {
             await sleep(500)
             leftBook.classList.remove('leftBound');
@@ -129,6 +133,10 @@ async function binarySearchHelper(array, target, left, right) {
           potentialBook.classList.remove('mid');
         }
     }
+    document.querySelector('.button').textContent = 'NO MATCH';
+    await sleep(1000);
+    reset(subjectArray);
+    document.querySelector('.button').textContent = 'Start Search';
     return -1;
 }
 
@@ -153,7 +161,14 @@ function reset(array) {
     if(book.classList.contains('searched')) {
       book.classList.remove('searched');
     }
+    if(book.classList.contains('rightBound' || book.classList.contains('leftBound'))) {
+      book.classList.remove('rightBound');
+      book.classList.remove('leftBound');
+    }
   }
+  document.querySelector('.low').textContent = ``;
+  document.querySelector('.midpoint').textContent = ``;
+  document.querySelector('.high').textContent = ``;
 }
 
 function arrayGeneration(num) {

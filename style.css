@@ -19,6 +19,8 @@
 body {
   font-family: var(--sans-serif);
   background-color: var(--clr-white);
+  /* background-image: url('https://images.unsplash.com/photo-1513519245088-0e12902e5a38?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80');
+  background-size: cover; */
 }
 
 main {
@@ -43,6 +45,19 @@ main {
                                   rgba(28, 39, 43, .7) 4.3rem, rgba(28, 39, 43, .9) 4.8rem, 
                                     var(--clr-dark) 4.9rem, var(--clr-dark) 5.3rem);
   background-size: 10px 5.3rem;
+  position: relative;
+}
+
+.bookcase-grid:after{
+  background-image: url(./assets/plants.png);
+  background-size: cover;
+  content: '';
+  width: 33em;
+  height: 15em;
+  bottom: 0;
+  left: -36em;
+  /* background-color: red; */
+  position: absolute;
 }
 
 .book {
@@ -63,7 +78,6 @@ main {
   transform: rotate(0.25turn) translateY(-35px);
   width: 60px;
   font-family: var(--serif);
-  font-size: 1em;
   /* font-weight: bold; */
 }
 
@@ -85,9 +99,6 @@ main {
   border-top-right-radius: 10px;
   padding: .5em;
 
-  /* display: flex;
-  justify-content: center; */
-
   display: grid;
   justify-items: center;
   grid-template-columns: repeat(3, 1fr);
@@ -100,7 +111,7 @@ main {
   cursor: pointer;
   border: 0;
   padding: .5em 1em;
-  font-size: 1.2em;
+  font-size: 1.2rem;
   font-weight: bolder;
   font-variant: small-caps;
   box-shadow: 0 10px 25px rgba(0, 0, 0, .6);
@@ -144,7 +155,7 @@ main {
   color: var(--clr-dark);
   line-height: 48px;
   text-align: center;
-  font-size: 1.2em;
+  font-size: 1.2rem;
 }
 
 .info {
@@ -306,14 +317,45 @@ select:hover {
   background-color: var(--clr-dark);
 }
 
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1685px) {
   .bookcase-grid {
-      width: 70%;
+    width: 70%;
+  }
+  .bookcase-grid::after {
+    width: 11em;
+    left: -14em
   }
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1300px) {
   .bookcase-grid {
-      width: 90%;
+    width: 90%;
+  }
+  .bookcase-grid::after {
+    display: none;
+  }
+  footer {
+    flex-direction: column;
+  }
+  .nav {
+    margin: .5em 0;
+  }
+
+  .nav>span,
+  .nav>label {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .key {
+grid-template-rows: 2;
+grid-template-areas: 
+". start ."
+". info .";
+align-items: center;
+  }
+  .button {
+    margin-bottom: 1em;
   }
 }
