@@ -83,13 +83,20 @@ main {
   margin: 0 auto;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  display: flex;
-  justify-content: center;
   padding: .5em;
+
+  /* display: flex;
+  justify-content: center; */
+
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: ". start info";
 }
 
 /* Hover effects: https://www.youtube.com/watch?v=ceNMP-aQkQ4&t=740s */
 .button {
+  grid-area: start;
   cursor: pointer;
   border: 0;
   padding: .5em 1em;
@@ -127,6 +134,26 @@ main {
   color: white;
 }
 
+.square {
+  border: 1px solid var(--clr-light);
+  background-color: var(--clr-white);
+  border-radius: 10px;
+  height: 48px;
+  width: 48px;
+  margin: 0 1em 0 .5em;
+  color: var(--clr-dark);
+  line-height: 48px;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.info {
+  grid-area: info;
+  display: flex;
+  align-items: center;
+  color: var(--clr-white);
+}
+
 footer {
   width: 100vw;
   min-height: 4em;
@@ -140,12 +167,13 @@ footer {
 }
 
 .title,
+.description,
 label {
   text-decoration: none;
   font-size: 1.5rem;
   color: var(--clr-white);
   font-weight: bolder;
-  
+  padding-right: .5em;
 }
 
 .title:hover {
@@ -272,6 +300,10 @@ select:hover {
 
 .match {
   background-color: goldenrod;
+}
+
+.searched {
+  background-color: var(--clr-dark);
 }
 
 @media only screen and (max-width: 1300px) {

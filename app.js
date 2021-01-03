@@ -15,7 +15,7 @@ async function getBooks(subject) {
       return (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0);
     });
     bookOption(subjectArray);
-    assignBook(subjectArray, 5);
+    assignBook(subjectArray, 4);
     return subjectArray;
   } catch (error) {
     console.log(error);
@@ -49,7 +49,7 @@ function bookOption(subjectArray) {
 // Assign each book to corresponding book div
 function assignBook(array, length) {
   for (let i = 0; i < array.length; i++) {
-      let shortened = shortedTitle(array[i]['title'], length);
+      let shortened = shortenedTitle(array[i]['title'], length);
       let bookDiv = document.querySelector(`#i${i}`);
       bookDiv.lastChild.textContent = `${shortened}`;
   }
@@ -57,7 +57,7 @@ function assignBook(array, length) {
 }
 
 // Shorten title to fit inside div
-function shortedTitle(title, length) {
+function shortenedTitle(title, length) {
     if (title.length === length || title.length < length) {
       return `${title}`;
     } else if (title.match(/^The/)) {
@@ -92,90 +92,69 @@ async function binarySearchHelper(array, target, left, right) {
         let leftBook = document.querySelector(`#i${array[left]}`);
         let rightBook = document.querySelector(`#i${array[right]}`);
         let potentialBook = document.querySelector(`#i${array[mid]}`);
+        let speed = selectSpeed();
 
         leftBook.classList.add('leftBound');
         rightBook.classList.add('rightBound');
-        await sleep(1000);
+        await sleep(speed);
         potentialBook.classList.add('mid');
         if (target === potentialMatch) {
-            await sleep(1000);
-            potentialBook.classList.remove('mid');
-            potentialBook.classList.add('match');
+            await sleep(500)
             leftBook.classList.remove('leftBound');
             rightBook.classList.remove('rightBound');
-            await sleep(1000);
+            potentialBook.classList.remove('mid');
+            removeRight(mid);
+            removeLeft(mid);
+            potentialBook.classList.add('match');
+            await sleep(speed);
             potentialBook.classList.remove('match');
             // getCover(subjectArray[mid]['cover_id']);
             // populateBookInfo(mid);
             // setTimeout(() => {
             //   displayInfo();
             // }, 750);
+            reset(subjectArray);
             return mid;
         } else if (target < potentialMatch) {
-          await sleep(1000);
+          await sleep(speed);
           rightBook.classList.remove('rightBound');
           right = mid - 1;
-          setTimeout(() => {
-            potentialBook.classList.remove('mid');
-          }, 1000);
+          removeRight(right);
+          potentialBook.classList.remove('mid');
         } else {
-          await sleep(1000);
+          await sleep(speed);
           leftBook.classList.remove('leftBound');
           left = mid + 1;
+          removeLeft(left);
           potentialBook.classList.remove('mid');
         }
     }
     return -1;
 }
 
-  // function binarySearch(array, target) {
-  //   return searchHelper(array, target, 0, array.length - 1);
-  // }
-
-  // function searchHelper(array, target, left, right) {
-  //   const mid = Math.floor((left + right) / 2);
-  //   const potentialMatch = array[mid];
-  //   let leftBook = document.querySelector(`#i${array[left]}`);
-  //   let rightBook = document.querySelector(`#i${array[right]}`);
-  //   let potentialBook = document.querySelector(`#i${array[mid]}`);
-  //   let speed = selectSpeed(document.querySelector('#adjust-speed').value);
-    
-  //   if (left > right) return -1;
-  //   leftBook.classList.add('leftBound');
-  //   rightBook.classList.add('rightBound');
-  //   potentialBook.classList.add('mid');
-  //   if (target === potentialMatch) {
-  //     leftBook.classList.remove('leftBound');
-  //     rightBook.classList.remove('rightBound');
-  //     potentialBook.classList.remove('mid');
-  //     potentialBook.classList.add('match');
-  //     setTimeout(() => {
-  //     potentialBook.classList.remove('match');
-  //     }, 1000);
-  //     getCover(subjectArray[mid]['cover_id']);
-  //     populateBookInfo(mid);
-  //     setTimeout(() => {
-  //       displayInfo();
-  //     }, 750);
-  //     return mid;
-  //     // ^Note: here, it should return a function to open a div and display info
-  //   } else if (target < potentialMatch) {
-  //     setTimeout(() => {
-  //       rightBook.classList.remove('rightBound');
-  //       potentialBook.classList.remove('mid');
-  //       return searchHelper(array, target, left, mid - 1);
-  //     }, speed);
-  //   } else {
-  //     setTimeout(() => {
-  //       leftBook.classList.remove('leftBound');
-  //       potentialBook.classList.remove('mid');
-  //       return searchHelper(array, target, mid + 1, right);
-  //     }, speed);
-  //   }
-  // }
-
-
 // Helper functions for algo visualization
+
+function removeLeft(bound) {
+  for (let i = 0; i < bound; i++) {
+    const book = document.querySelector(`#i${i}`);
+    book.classList.add('searched');
+  }
+}
+function removeRight(bound) {
+  for (let i = 95; i > bound; i--) {
+    const book = document.querySelector(`#i${i}`);
+    book.classList.add('searched');
+  }
+}
+
+function reset(array) {
+  for (let i = 0; i < array.length; i++) {
+    const book = document.querySelector(`#i${i}`);
+    if(book.classList.contains('searched')) {
+      book.classList.remove('searched');
+    }
+  }
+}
 
 function arrayGeneration(num) {
   let result = [];
@@ -200,7 +179,8 @@ function selectBookToSearch() {
 }
 
 // Sets speed of algo visualization
-function selectSpeed(slider) {
+function selectSpeed() {
+  const slider = document.querySelector('#adjust-speed').value;
   if (slider == 1) {
     return 1000;
   } else if (slider == 2) {
