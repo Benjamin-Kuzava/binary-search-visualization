@@ -95,11 +95,11 @@ Additionally, clicking on a book will allow users to view additional information
 |Dec 22| Core Application Structure: Basic page layout, code for book generation, basic code for binary search | Completed
 |Dec 23| Pseudocode / code for generating collection on click, selecting book to be searched in dropdown| Completed
 |Dec 24- Dec 26| Holiday| N/A
-|Dec 28| Pseudocode / code for highlighting book and accessing additional information | Incomplete
+|Dec 28| Pseudocode / code for highlighting book and accessing additional information | In Progress
 |Dec 30| JS and CSS for visualizing binary search | Completed
 |Dec 31- Jan 1| Holiday | N/A
 |Jan 3| Additional CSS / PMVP if applicable | Incomplete
-|Jan 4| MVP | Incomplete
+|Jan 4| MVP | Completed
 |Jan 5| Presentations | Incomplete
 
 ## Priority Matrix
@@ -113,17 +113,17 @@ Additionally, clicking on a book will allow users to view additional information
 | Basic HTML/CSS| L | 1hr| 1hr | 1hr |
 | Fetch info from API | H | 1hr| 1hr | 1hr  |
 | Grid and design for bookshelf | H | 3hr| 4hr | 4hr |
-| Connect API info and HTML elements| H | 3hr|  |  |
+| Connect API info and HTML elements| H | 3hr| 3hr | 3hr |
 | JS for generating books | H | 2hr| 2hr | 2hr |
-| JS for User inputs | H | 3hr|  |  |
-| MVP CSS | H | 3hr|  |  |
+| JS for User inputs | H | 3hr| 5hr | 5hr |
+| MVP CSS | H | 3hr| 8hr | 8hr |
 | Responsive design | M | 3hr|  |  |
 | Basic JS for BS search| H | 3hr| 5hr |  5hr|
 | Basic CSS for BS search| H | 3hr| 3hr | 3hr |
 | Tutorial or Info page| M | 3hr|  |  |
-| Speed adjustment for BS search| L | 3hr| 1hr | 1hr |
+| Speed adjustment for BS search| L | 3hr| 2hr | 2hr |
 | Advanced CSS styling| L | 3hr|  |  |
-| General QA | H | 5hr|  |  |
+| General QA/debugging | H | 5hr| 5hr | 5hr |
 | Total | H | 40hrs |  |  |
 
 ## Code Snippet
