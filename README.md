@@ -129,7 +129,13 @@ Additionally, clicking on a book will allow users to view additional information
 ## Code Snippet
 Below is the code used to visualize the binary search. The most difficult section of the project was manipulating the base algoritm to visualize what the algorithm is doing.
 ```
-	async function binarySearchHelper(array, target, left, right) {
+const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
+
+function binarySearch(array, target) {
+    return binarySearchHelper(array, target, 0, array.length - 1);
+}
+
+async function binarySearchHelper(array, target, left, right) {
     while (left <= right) {
         const mid = Math.floor((left + right) / 2);
         const potentialMatch = array[mid];
