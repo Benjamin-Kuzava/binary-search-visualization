@@ -253,7 +253,6 @@ select:hover {
   display: none;
 }
 
-/* Hidden Results */
 #book-title,
 .author-name {
   line-height: 1;
@@ -264,7 +263,7 @@ select:hover {
 .author-name,
 .book-content {
   display: block;
-  margin-bottom: 1em;
+  margin: 1em 0;
 }
 
 .author-name {
@@ -334,8 +333,6 @@ select:hover {
       margin-left: 1em;
   }
 }
-
-/* Hidden Results */
 
 /* Search Visualization CSS */
 .rightBound,

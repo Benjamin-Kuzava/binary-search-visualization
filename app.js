@@ -18,24 +18,13 @@ async function getBooks(subject) {
     });
     bookOption(subjectArray);
     assignBook(subjectArray, 4);
+    // console.log(subjectArray)
     return subjectArray;
   } catch (error) {
     console.log(error);
   }
 }
 getBooks('literature');
-
-// Grab book description
-async function bookSummary(key) {
-  try {
-    const url = `https://openlibrary.org${key}.json`;
-    const responses = await axios.get(url);
-    const description = responses.data.description.value;
-    // console.log(description);
-  } catch (error) {
-    console.log(error);
-  }
-}
 
 // Append book titles to dropdown
 function bookOption(subjectArray) {
@@ -231,12 +220,25 @@ const closeInfo = document.querySelector('#result-close');
       imgPlaceholder.src = `http://covers.openlibrary.org/b/id/${id}-L.jpg`;
     }
 } 
+
+// Grab book description
+async function bookSummary(key) {
+  try {
+    const url = `https://openlibrary.org${key}.json`;
+    const responses = await axios.get(url);
+    const bookContent = document.querySelector('.book-content');
+    const description = responses.data.description['value'];
+    bookContent.textContent = description;
+  } catch (error) {
+    console.log(error);
+  }
+}
  
 // Add content to book info div
 function populateBookInfo(index) {
   const bookTitle = document.querySelector('#book-title');
   const AuthorName = document.querySelector('.author-name');
-  // const bookContent = document.querySelector('.book-content');
+  bookSummary(subjectArray[index]['key']);
 
   bookTitle.textContent = subjectArray[index]['title'];
   AuthorName.textContent = subjectArray[index].authors[0]['name'];
