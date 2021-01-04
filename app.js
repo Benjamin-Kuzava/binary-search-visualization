@@ -42,8 +42,9 @@ function bookOption(subjectArray) {
   const select = document.querySelector("#book-dropdown");
   return subjectArray.forEach((book) => {
     const option = document.createElement('option');
-    option.value = `${book.title}`;
-    option.textContent = `${book.title}`;
+    let cleanedTitle = book.title.replaceAll('"', "'"); // edge case where title has double quotes
+    option.value = `${cleanedTitle}`;
+    option.textContent = `${cleanedTitle}`;
     select.append(option);
   });
 }
@@ -268,7 +269,8 @@ books.forEach(book => {
 // Set dropdown to correct option by extracting index from div id
 function getIndex(selection) {
   let index = selection.id.slice(1);
-  const option = document.querySelector(`option[value="${subjectArray[index]['title']}"]`);
+  let cleanedTitle = subjectArray[index]['title'].replaceAll('"', "'"); // edge case where title has double quotes
+  const option = document.querySelector(`option[value="${cleanedTitle}"]`);
   document.querySelector('#book-dropdown').value = option.value;
   document.querySelector('#input').textContent = option.value;
 }
