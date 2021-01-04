@@ -3,22 +3,19 @@ window.addEventListener("resize", smallScreen);
 window.addEventListener("load", smallScreen);
 window.addEventListener("resize", largeScreen);
 
-// API Requests
+// Main API Request
 let subjectArray = [];
 
-// Grab array of book objects from API
 async function getBooks(subject) {
   try {
     const url = `http://openlibrary.org/subjects/${subject}.json?limit=96`;
     const responses = await axios.get(url);
-    // console.log(responses);
     subjectArray = [...responses.data.works];
     subjectArray.sort((a, b) => {
       return (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0);
     });
     bookOption(subjectArray);
     assignBook(subjectArray, 4);
-    // console.log(subjectArray)
     return subjectArray;
   } catch (error) {
     console.log(error);
@@ -62,11 +59,14 @@ function shortenedTitle(title, length) {
 // Binary Search
   // sleep() in js = https://medium.com/dev-genius/how-to-make-javascript-sleep-or-wait-d95d33c99909
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
-
 const beginSearch = document.querySelector('#start');
 
 beginSearch.addEventListener('click', (e) => {
   e.preventDefault();
+  if (!document.querySelector('.pop-up').classList.contains('hidden')) {
+    document.querySelector('.pop-up').classList.toggle('hidden');
+  }
+  document.querySelector('.book-content').textContent = '';
   let array = [];
   if(window.innerWidth<800) {
     array = arrayGeneration(42);
@@ -227,11 +227,28 @@ async function bookSummary(key) {
     const url = `https://openlibrary.org${key}.json`;
     const responses = await axios.get(url);
     const bookContent = document.querySelector('.book-content');
-    const description = responses.data.description['value'];
-    bookContent.textContent = description;
+    const description = responses.data.description;
+    if(description !== undefined) {
+      bookContent.textContent = cleanSummary(description['value']);
+    } else {
+      bookContent.textContent = `If you are reading this, then unfortunately Open Library's API did not have a book summary available for this title. However, I can assure you that there's a summary out there on the internet, so RIP Open Library.`;
+    }
   } catch (error) {
     console.log(error);
   }
+}
+
+// limit summary to 640 chars. If no summary, give templated response.
+function cleanSummary(description) {
+  let cleaned = '';
+  if (description !== undefined) {
+    if (description.length > 640 && description.length > 100) {
+      cleaned = `${description.slice(0, 639)}...`;
+      return cleaned;
+    } else {
+      return description;
+    }
+  } 
 }
  
 // Add content to book info div
@@ -294,4 +311,3 @@ function largeScreen() {
   }
  }
 }
-
