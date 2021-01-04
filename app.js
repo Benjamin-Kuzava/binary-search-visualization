@@ -1,9 +1,4 @@
-// Adjust amount of books depending on screen size
-window.addEventListener("resize", smallScreen);
-window.addEventListener("load", smallScreen);
-window.addEventListener("resize", largeScreen);
-
-// Main API Request
+// Main API request
 let subjectArray = [];
 
 async function getBooks(subject) {
@@ -14,7 +9,7 @@ async function getBooks(subject) {
     subjectArray.sort((a, b) => {
       return (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0);
     });
-    bookOption(subjectArray);
+    bookOptions(subjectArray);
     assignBook(subjectArray, 4);
     return subjectArray;
   } catch (error) {
@@ -24,9 +19,9 @@ async function getBooks(subject) {
 getBooks('literature');
 
 // Append book titles to dropdown
-function bookOption(subjectArray) {
+function bookOptions(array) {
   const select = document.querySelector("#book-dropdown");
-  return subjectArray.forEach((book) => {
+  return array.forEach((book) => {
     const option = document.createElement('option');
     let cleanedTitle = book.title.replaceAll('"', "'"); // edge case where title has double quotes
     option.value = `${cleanedTitle}`;
@@ -58,6 +53,7 @@ function shortenedTitle(title, length) {
 
 // Binary Search
   // sleep() in js = https://medium.com/dev-genius/how-to-make-javascript-sleep-or-wait-d95d33c99909
+  // ^ More intuitive implementation of setTimeout
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 const beginSearch = document.querySelector('#start');
 
@@ -77,6 +73,7 @@ beginSearch.addEventListener('click', (e) => {
   binarySearch(array, target);
   });
 
+  // Adapted algorithm from https://www.algoexpert.io/
 function binarySearch(array, target) {
     return binarySearchHelper(array, target, 0, array.length - 1);
 }
@@ -89,6 +86,8 @@ async function binarySearchHelper(array, target, left, right) {
         let rightBook = document.querySelector(`#i${array[right]}`);
         let potentialBook = document.querySelector(`#i${array[mid]}`);
         let speed = selectSpeed();
+
+      // Update variable boxes && display bounds on bookshelf each iteration
         document.querySelector('.midpoint').textContent = ``;
         document.querySelector('.low').textContent = `${left}`;
         document.querySelector('.high').textContent = `${right}`;
@@ -97,6 +96,7 @@ async function binarySearchHelper(array, target, left, right) {
         await sleep(speed);
         potentialBook.classList.add('mid');
         document.querySelector('.midpoint').textContent = `${mid}`;
+      // Run search
         if (target === potentialMatch) {
           await sleep(500)
           leftBook.classList.remove('leftBound');
@@ -109,9 +109,9 @@ async function binarySearchHelper(array, target, left, right) {
           potentialBook.classList.remove('match');
           getCover(subjectArray[mid]['cover_id']);
           populateBookInfo(mid);
-          await sleep(100);
+          await sleep(1000);
           displayInfo();
-          reset(subjectArray);
+          reset(subjectArray); // take a look at this again
           return mid;
         } else if (target < potentialMatch) {
           await sleep(speed);
@@ -127,6 +127,7 @@ async function binarySearchHelper(array, target, left, right) {
           potentialBook.classList.remove('mid');
         }
     }
+  // If no book is selected
     document.querySelector('.button').textContent = 'NO MATCH';
     await sleep(1000);
     reset(subjectArray);
@@ -136,6 +137,7 @@ async function binarySearchHelper(array, target, left, right) {
 
 // Helper functions for algo visualization
 
+// Gray out searched areas
 function removeLeft(bound) {
   for (let i = 0; i < bound; i++) {
     const book = document.querySelector(`#i${i}`);
@@ -149,6 +151,7 @@ function removeRight(bound) {
   }
 }
 
+// Reset shelf && variable display
 function reset(array) {
   for (let i = 0; i < array.length; i++) {
     const book = document.querySelector(`#i${i}`);
@@ -165,6 +168,7 @@ function reset(array) {
   document.querySelector('.high').textContent = ``;
 }
 
+// Temporary array
 function arrayGeneration(num) {
   let result = [];
   let i = 0;
@@ -199,19 +203,20 @@ function selectSpeed() {
   }
 }
 
-// Displays book info after algo completes
+// Toggles hidden book information
 function displayInfo() {
   const result = document.querySelector('.pop-up');
   result.classList.toggle('hidden');
 }
 
-// Event listeners inside book info
+// Event listener inside book info
 const closeInfo = document.querySelector('#result-close');
   closeInfo.addEventListener('click', (e) => {
     e.preventDefault();
     displayInfo();
   });
 
+// Grab book cover if available
   function getCover(id) {
     const imgPlaceholder = document.querySelector('.img-placeholder');
     if (id === null) {
@@ -238,6 +243,16 @@ async function bookSummary(key) {
   }
 }
 
+// Add content to book info div
+function populateBookInfo(index) {
+  const bookTitle = document.querySelector('#book-title');
+  const AuthorName = document.querySelector('.author-name');
+  
+  bookSummary(subjectArray[index]['key']);
+  bookTitle.textContent = subjectArray[index]['title'];
+  AuthorName.textContent = subjectArray[index].authors[0]['name'];
+}
+
 // limit summary to 640 chars. If no summary, give templated response.
 function cleanSummary(description) {
   let cleaned = '';
@@ -250,16 +265,6 @@ function cleanSummary(description) {
     }
   } 
 }
- 
-// Add content to book info div
-function populateBookInfo(index) {
-  const bookTitle = document.querySelector('#book-title');
-  const AuthorName = document.querySelector('.author-name');
-  bookSummary(subjectArray[index]['key']);
-
-  bookTitle.textContent = subjectArray[index]['title'];
-  AuthorName.textContent = subjectArray[index].authors[0]['name'];
-}
 
 // Disable buttons after click
 function disableButton(button, time) {
@@ -270,7 +275,7 @@ function disableButton(button, time) {
 }
 
 // Alternate way to select dropdown
-// Add event listener to multiple divs: https://flaviocopes.com/how-to-add-event-listener-multiple-elements-javascript/
+  // Add event listener to multiple divs: https://flaviocopes.com/how-to-add-event-listener-multiple-elements-javascript/
 const books = document.querySelectorAll(".book-title");
 
 books.forEach(book => {
@@ -280,11 +285,11 @@ books.forEach(book => {
     getIndex(selection);
     setTimeout(() => {
       selection.classList.toggle('selected');
-    }, 1000)
-  })
+    }, 250);
+  });
 })
 
-// Set dropdown to correct option by extracting index from div id
+// Set dropdown to selection
 function getIndex(selection) {
   let index = selection.id.slice(1);
   let cleanedTitle = subjectArray[index]['title'].replaceAll('"', "'"); // edge case where title has double quotes
@@ -293,6 +298,10 @@ function getIndex(selection) {
   document.querySelector('#input-display').textContent = option.value;
 }
 
+// Adjust amount of books depending on screen size
+window.addEventListener("resize", smallScreen);
+window.addEventListener("load", smallScreen);
+window.addEventListener("resize", largeScreen);
 
 function smallScreen() {
   if (window.innerWidth<800){

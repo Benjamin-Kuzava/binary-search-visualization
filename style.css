@@ -1,3 +1,6 @@
+/* -----------
+General Styling 
+----------- */
 :root { 
   --clr-light: rgb(249, 157, 120);
   --clr-white: whitesmoke;
@@ -21,7 +24,6 @@
 body {
   font-family: var(--sans-serif);
   background-color: var(--clr-white);
-  font-weight: 400;
   font-size: 1rem;
   line-height: 1.6;
 }
@@ -34,25 +36,29 @@ main {
   position: relative;
 }
 
+/* ----------- 
+Bookcase & Books
+----------- */
 .bookcase-grid {
   display: flex;
   flex-wrap: wrap;
-  padding-left: .2em;
   width: 33%;
-  margin: 0 auto;
+  background-image: linear-gradient(var(--clr-white), var(--clr-white) 4.3rem, 
+  rgba(28, 39, 43, .7) 4.3rem, rgba(28, 39, 43, .9) 4.8rem, 
+  var(--clr-dark) 4.9rem, var(--clr-dark) 5.3rem);
   border-left: 2em solid var(--clr-dark);
   border-right: 2em solid var(--clr-dark);
-  background-image: linear-gradient(var(--clr-white), var(--clr-white) 4.3rem, 
-                                  rgba(28, 39, 43, .7) 4.3rem, rgba(28, 39, 43, .9) 4.8rem, 
-                                    var(--clr-dark) 4.9rem, var(--clr-dark) 5.3rem);
   background-size: 10px 5.3rem;
+  margin: 0 auto;
+  padding-left: .2em;
   position: relative;
 }
 
+/* Jank way to insert an img */
 .bookcase-grid:after{
+  content: '';
   background-image: url(./assets/plants.png);
   background-size: cover;
-  content: '';
   width: 33em;
   height: 15em;
   bottom: 0;
@@ -72,12 +78,13 @@ main {
 
 .book .book-title {
   text-transform: capitalize;
-  margin: .4em -.4em;
+  font-family: var(--serif);
   font-size: 1rem;
+  margin: .4em -.4em;
+  width: 60px;
+  /* flip text vertically */
   transform-origin: 0% 0%;
   transform: rotate(0.25turn) translateY(-35px);
-  width: 60px;
-  font-family: var(--serif);
 }
 
 .book:hover {
@@ -89,7 +96,10 @@ main {
   color: var(--clr-white);
 }
 
-.key {
+/* -----------
+User Input & Data
+----------- */
+.start-misc {
   width: 95vw;
   min-height: 4em;
   background-color: var(--clr-midgray);
@@ -121,7 +131,7 @@ main {
 }
 
 /* Hover effects: https://www.youtube.com/watch?v=ceNMP-aQkQ4&t=740s */
-.button::after {
+.button:after {
   content: "";
   position: absolute;
   width: 100%;
@@ -135,7 +145,7 @@ main {
   border-radius: 10px;
 }
 
-.button:hover::after {
+.button:hover:after {
   transform: scale(1);
   border-radius: 10px;
 }
@@ -392,7 +402,7 @@ select:hover {
 }
 
 @media only screen and (max-width: 1000px) {
-  .key {
+  .start-misc {
 grid-template-rows: 2;
 grid-template-areas: 
 ". start ."
@@ -410,7 +420,7 @@ align-items: center;
 }
 
 @media only screen and (max-width: 800px) {
-  .key {
+  .start-misc {
     width: 100vw;
     border-radius: 0;
   }
