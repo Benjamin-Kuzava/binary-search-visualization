@@ -118,11 +118,10 @@ async function binarySearchHelper(array, target, left, right) {
           potentialBook.classList.add('match');
           await sleep(speed);
           potentialBook.classList.remove('match');
-          // getCover(subjectArray[mid]['cover_id']);
-          // populateBookInfo(mid);
-          // setTimeout(() => {
-          //   displayInfo();
-          // }, 750);
+          getCover(subjectArray[mid]['cover_id']);
+          populateBookInfo(mid);
+          await sleep(250);
+          displayInfo();
           reset(subjectArray);
           return mid;
         } else if (target < potentialMatch) {
@@ -272,7 +271,7 @@ function getIndex(selection) {
   let cleanedTitle = subjectArray[index]['title'].replaceAll('"', "'"); // edge case where title has double quotes
   const option = document.querySelector(`option[value="${cleanedTitle}"]`);
   document.querySelector('#book-dropdown').value = option.value;
-  document.querySelector('#input').textContent = option.value;
+  document.querySelector('#input-display').textContent = option.value;
 }
 
 

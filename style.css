@@ -10,7 +10,9 @@
   --sans-serif:'Nunito', sans-serif
 }
 
-*, *:after, *:before {
+*, 
+*:before,
+*:after {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -19,8 +21,6 @@
 body {
   font-family: var(--sans-serif);
   background-color: var(--clr-white);
-  /* background-image: url('https://images.unsplash.com/photo-1513519245088-0e12902e5a38?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80');
-  background-size: cover; */
 }
 
 main {
@@ -28,10 +28,8 @@ main {
   flex-direction: column;
   justify-content: flex-end;
   height: 100vh;
-
   position: relative;
 }
-
 
 .bookcase-grid {
   display: flex;
@@ -56,7 +54,6 @@ main {
   height: 15em;
   bottom: 0;
   left: -36em;
-  /* background-color: red; */
   position: absolute;
 }
 
@@ -68,7 +65,6 @@ main {
   margin: .6rem .45em;
   color: var(--clr-dark);
   cursor: pointer;
-  /* display: none; */
 }
 
 .book .book-title {
@@ -105,7 +101,6 @@ main {
   grid-template-areas: ". start info";
 }
 
-/* Hover effects: https://www.youtube.com/watch?v=ceNMP-aQkQ4&t=740s */
 .button {
   grid-area: start;
   cursor: pointer;
@@ -122,6 +117,7 @@ main {
   border-radius: 10px;
 }
 
+/* Hover effects: https://www.youtube.com/watch?v=ceNMP-aQkQ4&t=740s */
 .button::after {
   content: "";
   position: absolute;
@@ -260,7 +256,6 @@ select:hover {
   "img img desc desc desc"
   "img img desc desc desc"
   "img img . button button";
-
   width: 50%;
   height: 80%;
   border: 2px solid var(--clr-dark);
@@ -317,17 +312,13 @@ select:hover {
   background-color: var(--clr-dark);
 }
 
-#input {
+#input-display {
   display: none;
   text-align: center;
   border-radius: 5px;
   background-color: var(--clr-white);
   padding: .5em;
   font-variant: normal;
-}
-
-.hidden {
-  display: none;
 }
 
 @media only screen and (max-width: 1685px) {
@@ -395,21 +386,14 @@ align-items: center;
     display: none;
   }
 
-  #input {
+  #input-display {
     display: block;
   }
 }
 
 @media only screen and (max-width: 680px) {
   .bookcase-grid {
-    /* background-image: none;
-    background-size: none; */
     max-height: 80vh;
     width: 100%;
-  }
-
-  .book {
-    flex-shrink: 3;
-    /* height: 2em; */
   }
 }
