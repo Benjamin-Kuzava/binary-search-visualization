@@ -127,8 +127,56 @@ Additionally, clicking on a book will allow users to view additional information
 | Total | H | 40hrs |  |  |
 
 ## Code Snippet
+Below is the code used to visualize the binary search. The most difficult section of the project was manipulating the base algoritm to visualize what the algorithm is doing.
 ```
-	W.I.P.
+	async function binarySearchHelper(array, target, left, right) {
+    while (left <= right) {
+        const mid = Math.floor((left + right) / 2);
+        const potentialMatch = array[mid];
+        let leftBook = document.querySelector(`#i${array[left]}`);
+        let rightBook = document.querySelector(`#i${array[right]}`);
+        let potentialBook = document.querySelector(`#i${array[mid]}`);
+        let speed = selectSpeed();
+        document.querySelector('.midpoint').textContent = ``;
+        document.querySelector('.low').textContent = `${left}`;
+        document.querySelector('.high').textContent = `${right}`;
+        leftBook.classList.add('leftBound');
+        rightBook.classList.add('rightBound');
+        await sleep(speed);
+        potentialBook.classList.add('mid');
+        document.querySelector('.midpoint').textContent = `${mid}`;
+        if (target === potentialMatch) {
+          await sleep(500)
+          leftBook.classList.remove('leftBound');
+          rightBook.classList.remove('rightBound');
+          potentialBook.classList.remove('mid');
+          removeRight(mid);
+          removeLeft(mid);
+          potentialBook.classList.add('match');
+          await sleep(speed);
+          potentialBook.classList.remove('match');
+          reset(subjectArray);
+          return mid;
+        } else if (target < potentialMatch) {
+          await sleep(speed);
+          rightBook.classList.remove('rightBound');
+          right = mid - 1;
+          removeRight(right);
+          potentialBook.classList.remove('mid');
+        } else {
+          await sleep(speed);
+          leftBook.classList.remove('leftBound');
+          left = mid + 1;
+          removeLeft(left);
+          potentialBook.classList.remove('mid');
+        }
+    }
+    document.querySelector('.button').textContent = 'NO MATCH';
+    await sleep(1000);
+    reset(subjectArray);
+    document.querySelector('.button').textContent = 'Start Search';
+    return -1;
+}
 ```
 ## Change Log
 ```
