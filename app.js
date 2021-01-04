@@ -1,5 +1,7 @@
-// Base Search URL: http://openlibrary.org/subjects/${subject}.json?limit=96
-// Base Img URL: http://covers.openlibrary.org/b/id/${id}-L.jpg
+// Adjust amount of books depending on screen size
+window.addEventListener("resize", smallScreen);
+window.addEventListener("load", smallScreen);
+window.addEventListener("resize", largeScreen);
 
 // API Requests
 let subjectArray = [];
@@ -75,11 +77,15 @@ const beginSearch = document.querySelector('#start');
 
 beginSearch.addEventListener('click', (e) => {
   e.preventDefault();
-  const array = arrayGeneration(subjectArray.length);
+  let array = [];
+  if(window.innerWidth<800) {
+    array = arrayGeneration(42);
+  } else {
+    array = arrayGeneration(subjectArray.length);
+  }
   let target = selectBookToSearch();
   binarySearch(array, target);
-  })
-
+  });
 
 function binarySearch(array, target) {
     return binarySearchHelper(array, target, 0, array.length - 1);
@@ -96,29 +102,28 @@ async function binarySearchHelper(array, target, left, right) {
         document.querySelector('.midpoint').textContent = ``;
         document.querySelector('.low').textContent = `${left}`;
         document.querySelector('.high').textContent = `${right}`;
-
         leftBook.classList.add('leftBound');
         rightBook.classList.add('rightBound');
         await sleep(speed);
         potentialBook.classList.add('mid');
         document.querySelector('.midpoint').textContent = `${mid}`;
         if (target === potentialMatch) {
-            await sleep(500)
-            leftBook.classList.remove('leftBound');
-            rightBook.classList.remove('rightBound');
-            potentialBook.classList.remove('mid');
-            removeRight(mid);
-            removeLeft(mid);
-            potentialBook.classList.add('match');
-            await sleep(speed);
-            potentialBook.classList.remove('match');
-            // getCover(subjectArray[mid]['cover_id']);
-            // populateBookInfo(mid);
-            // setTimeout(() => {
-            //   displayInfo();
-            // }, 750);
-            reset(subjectArray);
-            return mid;
+          await sleep(500)
+          leftBook.classList.remove('leftBound');
+          rightBook.classList.remove('rightBound');
+          potentialBook.classList.remove('mid');
+          removeRight(mid);
+          removeLeft(mid);
+          potentialBook.classList.add('match');
+          await sleep(speed);
+          potentialBook.classList.remove('match');
+          // getCover(subjectArray[mid]['cover_id']);
+          // populateBookInfo(mid);
+          // setTimeout(() => {
+          //   displayInfo();
+          // }, 750);
+          reset(subjectArray);
+          return mid;
         } else if (target < potentialMatch) {
           await sleep(speed);
           rightBook.classList.remove('rightBound');
@@ -205,9 +210,6 @@ function selectSpeed() {
   }
 }
 
-
-
-
 // Displays book info after algo completes
 function displayInfo() {
   const result = document.querySelector('.result');
@@ -268,4 +270,25 @@ function getIndex(selection) {
   let index = selection.id.slice(1);
   const option = document.querySelector(`option[value="${subjectArray[index]['title']}"]`);
   document.querySelector('#book-dropdown').value = option.value;
+  document.querySelector('#input').textContent = option.value;
 }
+
+
+function smallScreen() {
+  if (window.innerWidth<800){
+  for (let i = 42; i < 96; i++) {
+    let bookDiv = document.querySelector(`#i${i}`);
+    bookDiv.classList.add('hidden');
+  }
+ }
+}
+
+function largeScreen() {
+  if (window.innerWidth>800){
+  for (let i = 42; i < 96; i++) {
+    let bookDiv = document.querySelector(`#i${i}`);
+    bookDiv.classList.remove('hidden');
+  }
+ }
+}
+

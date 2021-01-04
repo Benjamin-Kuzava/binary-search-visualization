@@ -68,6 +68,7 @@ main {
   margin: .6rem .45em;
   color: var(--clr-dark);
   cursor: pointer;
+  /* display: none; */
 }
 
 .book .book-title {
@@ -78,7 +79,6 @@ main {
   transform: rotate(0.25turn) translateY(-35px);
   width: 60px;
   font-family: var(--serif);
-  /* font-weight: bold; */
 }
 
 .book:hover {
@@ -197,7 +197,7 @@ label {
 
 /* Custom select menus: https://www.youtube.com/watch?v=bB14uo0Tu5A */
 select {
-  min-width: 450px;
+  width: 450px;
   font-size: 1.2rem;
   padding: .8em 1em;
   background-color: var(--clr-darkgray);
@@ -317,6 +317,19 @@ select:hover {
   background-color: var(--clr-dark);
 }
 
+#input {
+  display: none;
+  text-align: center;
+  border-radius: 5px;
+  background-color: var(--clr-white);
+  padding: .5em;
+  font-variant: normal;
+}
+
+.hidden {
+  display: none;
+}
+
 @media only screen and (max-width: 1685px) {
   .bookcase-grid {
     width: 70%;
@@ -357,5 +370,46 @@ align-items: center;
   }
   .button {
     margin-bottom: 1em;
+  }
+  .square {
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .key {
+    width: 100vw;
+    border-radius: 0;
+  }
+
+  footer {
+    padding-top: .5em;
+  }
+
+  .select,
+  .custom-arrow,
+  .description,
+  .title {
+    display: none;
+  }
+
+  #input {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 680px) {
+  .bookcase-grid {
+    /* background-image: none;
+    background-size: none; */
+    max-height: 80vh;
+    width: 100%;
+  }
+
+  .book {
+    flex-shrink: 3;
+    /* height: 2em; */
   }
 }
