@@ -2,12 +2,19 @@
 General Styling 
 ----------- */
 :root { 
-  --clr-light: rgb(249, 157, 120);
   --clr-white: whitesmoke;
+  /* --clr-light: rgb(249, 157, 120); */
+  --clr-light: #68B442;
+  --clr-dark: rgb(28, 39, 43);
   --clr-lightgray: rgb(109, 128, 145);
   --clr-midgray: rgb(53, 82, 101);
   --clr-darkgray: rgb(42, 64, 76);
-  --clr-dark: rgb(28, 39, 43);
+
+  --clr-accent-one: #5C3326;
+  --clr-accent-two: #C73845;
+  --clr-accent-three: #68B442;
+  --clr-accent-four: #ABCA3B;
+  --clr-accent-five: #81B5B7;
 
   --serif: 'Libre Baskerville', serif;
   --sans-serif:'Nunito', sans-serif
@@ -44,8 +51,8 @@ Bookcase & Books
   flex-wrap: wrap;
   width: 33%;
   background-image: linear-gradient(var(--clr-white), var(--clr-white) 4.3rem, 
-  rgba(28, 39, 43, .7) 4.3rem, rgba(28, 39, 43, .9) 4.8rem, 
-  var(--clr-dark) 4.9rem, var(--clr-dark) 5.3rem);
+    rgba(28, 39, 43, .7) 4.3rem, rgba(28, 39, 43, .9) 4.8rem, 
+      var(--clr-dark) 4.9rem, var(--clr-dark) 5.3rem);
   border-left: 2em solid var(--clr-dark);
   border-right: 2em solid var(--clr-dark);
   background-size: 10px 5.3rem;
@@ -79,7 +86,6 @@ Bookcase & Books
 .book .book-title {
   text-transform: capitalize;
   font-family: var(--serif);
-  font-size: 1rem;
   margin: .4em -.4em;
   width: 60px;
   /* flip text vertically */
@@ -107,7 +113,6 @@ User Input & Data
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   padding: .5em;
-
   display: grid;
   justify-items: center;
   grid-template-columns: repeat(3, 1fr);
@@ -138,7 +143,7 @@ User Input & Data
   height: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(109, 128, 145, .9);
+  background-color: var(--clr-accent-five);
   z-index: -1;
   transform: scale(0);
   transition: transform 100ms ease-in;
@@ -222,7 +227,7 @@ select:hover {
 }
 
 .custom-arrow {
-  background: var(--clr-lightgray);
+  background: var(--clr-accent-five);
   display: block;
   height: 100%;
   width: 4em;
@@ -347,7 +352,7 @@ select:hover {
 /* Search Visualization CSS */
 .rightBound,
 .leftBound {
-  background-color: var(--clr-lightgray);
+  background-color: var(--clr-accent-five);
 }
 
 .mid{

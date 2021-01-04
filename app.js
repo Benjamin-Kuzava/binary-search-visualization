@@ -233,10 +233,11 @@ async function bookSummary(key) {
     const responses = await axios.get(url);
     const bookContent = document.querySelector('.book-content');
     const description = responses.data.description;
-    if(description !== undefined) {
-      bookContent.textContent = cleanSummary(description['value']);
+    console.log(typeof(description))
+    if(typeof(description) === 'string') {
+      bookContent.textContent = cleanSummary(description);
     } else {
-      bookContent.textContent = `If you are reading this, then unfortunately Open Library's API did not have a book summary available for this title. However, I can assure you that there's a summary out there on the internet, so RIP Open Library.`;
+      bookContent.textContent = cleanSummary(description['value']);
     }
   } catch (error) {
     console.log(error);
