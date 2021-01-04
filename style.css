@@ -21,6 +21,9 @@
 body {
   font-family: var(--sans-serif);
   background-color: var(--clr-white);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 main {
@@ -246,53 +249,93 @@ select:hover {
   top: 65%;
 }
 
-.result {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  grid-template-areas: 
-  "img img title title title"
-  "img img name . ."
-  "img img desc desc desc"
-  "img img desc desc desc"
-  "img img . button button";
-  width: 50%;
-  height: 80%;
-  border: 2px solid var(--clr-dark);
-  border-radius: 10px;
-  background-color: var(--clr-white);
-  z-index: 1;
-  position: absolute;
-  align-self: center;
-  margin-bottom: 9em;
-}
-
 .hidden {
   display: none;
 }
 
-#book-title {
-  grid-area: title;
+/* Hidden Results */
+#book-title,
+.author-name {
+  line-height: 1;
+  font-family: var(--serif);
   font-variant: small-caps;
 }
 
-.author-name {
-  grid-area: name;
-}
-
+.author-name,
 .book-content {
-  grid-area: desc;
+  display: block;
+  margin-bottom: 1em;
 }
 
-.img-placeholder {
-  grid-area: img;
-  margin: 1em;
-  border: 1px solid var(--clr-dark);
+.author-name {
+  margin-left: 2em;
+}
+
+.image {
+  margin: 0 auto;
+  margin-bottom: 1em;
+}
+
+.image img {
+  max-width: 100%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, .6);
+  border-radius: 2px;
+}
+
+.pop-up {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+}
+
+.result-container {
+  margin: 0 auto;
+  width: min(95%, 60rem);
+  border: 2px solid var(--clr-darkgray);
+  border-radius: 10px;
+  background-color: rgba(255,255,255, .9);
+  padding: 1.5em;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, .6);
 }
 
 #result-close {
-  grid-area: button;
+  cursor: pointer;
+  border: 0;
+  padding: .5em 1em;
+  font-size: 1.1rem;
+  font-weight: bolder;
+  background-color: var(--clr-midgray);
+  color: var(--clr-white);
+  border: 1px solid var(--clr-dark);
+  border-radius: 10px;
 }
+
+@media (min-width: 800px) {
+  .pop-up {
+    top: 17rem;
+  }
+  .result {
+      flex-direction: row;
+  }
+
+  .result > * {
+      flex-basis: 100%;
+  }
+
+  .image {
+      margin-right: 1em;
+      margin-left: 1em;
+  }
+}
+
+/* Hidden Results */
 
 /* Search Visualization CSS */
 .rightBound,

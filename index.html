@@ -14,13 +14,25 @@
 <body>
   <main>
 
-    <div class="result hidden">
-      <h1 id="book-title">Sample Title</h1>
-      <h4 class="author-name">Sample Author</h4>
-      <p class="book-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      <img src="" alt="Book Cover" class="img-placeholder">
-      <button id='result-close'>Close</button>
+    <div class="pop-up">
+      <div class="result-container">
+        <section class="result">
+          <div class="image">
+            <img src="http://covers.openlibrary.org/b/id/8281954-L.jpg" alt="Book Cover" class="img-placeholder">
+          </div>
+          <div class="information">
+            <h1 id="book-title">Sample Title</h1>
+            <h3 class="author-name">Sample Author</h3>
+            <div class="paragraphs">
+              <p class="book-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              <!-- <p class="book-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> -->
+            </div>
+            <button id='result-close'>Close</button>
+          </div>
+        </section>
+      </div>
     </div>
+
 
       <div class="content">
           <div class="bookcase-grid">
@@ -122,6 +134,7 @@
               <div class="book" id="i95"><p class="book-title"></p></div>
           </div>
       </div>
+
       <div class="key">  
           <button class="button" id="start">Start Search</button>
           <div class="info">
@@ -133,6 +146,7 @@
             <div class="square high"></div>
           </div>
       </div>
+
       <footer>
           <a href="#" class="title nav">Binary Search Visualization</a>
           <div class="select nav">
@@ -148,6 +162,7 @@
               <input type="range" id="adjust-speed" min="1" max="3" value="2" >
           </div>
       </footer>
+
   </main>
 </body>
 </html>

@@ -120,7 +120,7 @@ async function binarySearchHelper(array, target, left, right) {
           potentialBook.classList.remove('match');
           getCover(subjectArray[mid]['cover_id']);
           populateBookInfo(mid);
-          await sleep(250);
+          await sleep(100);
           displayInfo();
           reset(subjectArray);
           return mid;
@@ -212,7 +212,7 @@ function selectSpeed() {
 
 // Displays book info after algo completes
 function displayInfo() {
-  const result = document.querySelector('.result');
+  const result = document.querySelector('.pop-up');
   result.classList.toggle('hidden');
 }
 
