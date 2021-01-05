@@ -302,6 +302,11 @@ Hidden Divs (Welcome and Results)
   color: var(--clr-darkgray);
 }
 
+.welcome-subheader {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
 .welcome-p {
   padding: .5em 0;
 }
@@ -317,7 +322,8 @@ Hidden Divs (Welcome and Results)
   margin-bottom: 1em;
 }
 
-.img-placeholder {
+.img-placeholder,
+.welcome-img {
   max-width: 100%;
   box-shadow: 0 10px 25px rgba(0, 0, 0, .6);
   border-radius: 2px;
@@ -332,14 +338,17 @@ Hidden Divs (Welcome and Results)
   position: absolute;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 2;
+  margin: auto;
 }
 
-.welcome-wrapper {
+/* .welcome-wrapper {
   margin: auto;
   right: 0;
   bottom: 0;
-}
+} */
 
 .result,
 .welcome {
@@ -350,7 +359,7 @@ Hidden Divs (Welcome and Results)
 }
 
 .welcome {
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
 }
 
 .information {

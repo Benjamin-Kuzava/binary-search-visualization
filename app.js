@@ -326,9 +326,9 @@ function nextPage(count) {
       break;
     case 1:
       header = "What is a Binary Search?";
-      subheader = "A binary search is...";
-      p1 = "The advantage of using a binary search over something like a linear search is time complexity...";
-      p2 = "Something else...";
+      subheader = "A binary search works by dividing its search area in half at each interval. The algorithm checks which side of the midpoint the final target sits, and then adjusts its bounds accordingly.";
+      p1 = "The advantage of using a binary search over something like a linear search is time complexity. A linear search has a time complexity of O(n), while most implementations of binary searches have a time complexity of O(log n). In other words, the larger the array, the more efficient a binary search becomes.";
+      p2 = "";
       image = "./assets/mario-bs.png";
       break;
     case 2:
