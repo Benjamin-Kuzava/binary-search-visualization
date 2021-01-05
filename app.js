@@ -307,6 +307,57 @@ function getIndex(selection) {
   document.querySelector('#input-display').textContent = option.value;
 }
 
+// Welcome Screen
+
+function nextPage(count) {
+  const welcomeHeader = document.querySelector(".welcome-header");
+  const welcomeSubheader = document.querySelector(".welcome-subheader");
+  const welcomeP1 = document.querySelector(".welcome-p1");
+  const welcomeP2 = document.querySelector(".welcome-p2");
+  const welcomeImgSrc = document.querySelector(".welcome-img");
+  
+  switch(count) {
+    case 0:
+      header = "Binary Search Visualization";
+      subheader = "This application is a visualization tool that illustrates how a binary search navigates through an array of sorted items to locate a specific item.";
+      p1 = `Feel free to skip ahead using the <span class="bold">Close</span> button below.`;
+      p2 = `To learn more, click <span class="bold">Next</span> to continue.`;
+      image = "./assets/bs.png";
+      break;
+    case 1:
+      header = "What is a Binary Search?";
+      subheader = "A binary search is...";
+      p1 = "The advantage of using a binary search over something like a linear search is time complexity...";
+      p2 = "Something else...";
+      image = "./assets/mario-bs.png";
+      break;
+    case 2:
+      header = "How to Use This Application";
+      subheader = "Imagine that, like me, you collect a ton of books, but can never find the one you’re looking for on your huge bookshelf.";
+      p1 = "If you sorted your collection alphabetically, you could implement a binary search to locate whatever book you need to find. This application visualizes what that process might look like!";
+      p2 = "Below, select a book to search, choose your speed, and click Start Search to begin.";
+      image = "./assets/cat-bs.png";
+      break;
+  }
+  welcomeHeader.textContent = header;
+  welcomeSubheader.textContent = subheader;
+  welcomeP1.textContent = p1;
+  welcomeP2.textContent = p2;
+  welcomeImgSrc.src = image;
+}
+
+const next = document.querySelector('.next');
+let pageCount = 1;
+
+next.addEventListener('click', (e) => {
+  e.preventDefault();
+  nextPage(pageCount);
+    pageCount++;
+  if(pageCount === 3) {
+    next.classList.toggle('hidden');
+  }
+});
+
 // Adjust amount of books depending on screen size
 window.addEventListener("resize", smallScreen);
 window.addEventListener("load", smallScreen);

@@ -272,8 +272,8 @@ Hidden Divs (Welcome and Results)
 
 #book-title,
 .author-name,
-.weclome h1,
-.welcome h4 {
+.welcome-header,
+.welcome-subheader {
   line-height: 1.6;
 }
 
@@ -284,14 +284,18 @@ Hidden Divs (Welcome and Results)
 }
 
 .author-name,
-.book-content
-.welcome h4,
-.welcome p {
+.book-content,
+.welcome-subheader,
+.welcome-p > * {
   display: block;
   margin: 1em 0;
 }
 
-.welcome h1 {
+.author-name {
+  margin-left: 2em;
+}
+
+.welcome-header {
   font-size: 2rem;
   padding-bottom: .5em;
   font-family: var(--accent);
@@ -308,19 +312,19 @@ Hidden Divs (Welcome and Results)
   font-family: var(--accent);
 }
 
-.author-name {
-  margin-left: 2em;
-}
-
 .image {
   margin: 0 auto;
   margin-bottom: 1em;
 }
 
-.image img {
+.img-placeholder {
   max-width: 100%;
   box-shadow: 0 10px 25px rgba(0, 0, 0, .6);
   border-radius: 2px;
+}
+
+.welcome-img {
+  max-width: 50%;
 }
 
 .pop-up,
@@ -340,14 +344,25 @@ Hidden Divs (Welcome and Results)
 .result,
 .welcome {
   display: flex;
-  flex-flow: column wrap;
+  flex-direction: column;
   padding: 1rem 0;
+  height: 100%;
 }
 
 .welcome {
+  flex-wrap: wrap;
+}
+
+.information {
+  display: flex;
+  flex-flow: column wrap;
   height: 100%;
-  text-align: center;
   justify-content: space-between;
+}
+
+.welcome {
+  justify-content: space-between;
+  text-align: center;
 }
 
 .result-container,
@@ -382,12 +397,19 @@ Hidden Divs (Welcome and Results)
   border-radius: 10px;
 }
 
+.information button {
+  max-width: 87px;
+  align-self: flex-end;
+}
+
 @media (min-width: 800px) {
-  .pop-up {
-    top: 17rem;
+  .welcome-container,
+  .result-container {
+    height: 40rem;
+    margin-top: 8rem;
   }
   .result {
-      flex-direction: row;
+      flex-flow: row nowrap;
   }
 
   .result > * {
@@ -397,12 +419,6 @@ Hidden Divs (Welcome and Results)
   .image {
       margin-right: 1em;
       margin-left: 1em;
-  }
-}
-
-@media (min-width: 800px) {
-  .welcome-container {
-    max-height: calc(100vh - 35%);
   }
 }
 
