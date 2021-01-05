@@ -65,7 +65,7 @@ beginSearch.addEventListener('click', (e) => {
   document.querySelector('.book-content').textContent = '';
   let array = [];
   if(window.innerWidth<800) {
-    array = arrayGeneration(42);
+    array = arrayGeneration(25);
   } else {
     array = arrayGeneration(subjectArray.length);
   }
@@ -365,7 +365,7 @@ window.addEventListener("resize", largeScreen);
 
 function smallScreen() {
   if (window.innerWidth<800){
-  for (let i = 42; i < 96; i++) {
+  for (let i = 25; i < 96; i++) {
     let bookDiv = document.querySelector(`#i${i}`);
     bookDiv.classList.add('hidden');
   }
@@ -374,7 +374,7 @@ function smallScreen() {
 
 function largeScreen() {
   if (window.innerWidth>800){
-  for (let i = 42; i < 96; i++) {
+  for (let i = 25; i < 96; i++) {
     let bookDiv = document.querySelector(`#i${i}`);
     bookDiv.classList.remove('hidden');
   }
