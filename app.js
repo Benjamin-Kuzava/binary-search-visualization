@@ -228,7 +228,7 @@ const closeInfo = document.querySelector('#result-close');
     if (id === null) {
       imgPlaceholder.src = 'assets/wp404error.jpg';
     } else {
-      imgPlaceholder.src = `http://covers.openlibrary.org/b/id/${id}-L.jpg`;
+      imgPlaceholder.src = `https://covers.openlibrary.org/b/id/${id}-L.jpg`;
     }
 } 
 
