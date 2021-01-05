@@ -327,7 +327,7 @@ function nextPage(count) {
     case 1:
       header = "What is a Binary Search?";
       subheader = "A binary search works by dividing its search area in half at each interval. The algorithm checks which side of the midpoint the final target sits, and then adjusts its bounds accordingly.";
-      p1 = "The advantage of using a binary search over something like a linear search is time complexity. A linear search has a time complexity of O(n), while most implementations of binary searches have a time complexity of O(log n). In other words, the larger the array, the more efficient a binary search becomes.";
+      p1 = `The advantage of using a binary search over something like a linear search is time complexity. A linear search has a time complexity of <span class="bold">O(n)</span>, while most implementations of binary searches have a time complexity of <span class="bold">O(log n)</span>. In other words, the larger the array, the more efficient a binary search becomes.`;
       p2 = "";
       image = "./assets/mario-bs.png";
       break;
@@ -335,14 +335,14 @@ function nextPage(count) {
       header = "How to Use This Application";
       subheader = "Imagine that, like me, you collect a ton of books, but can never find the one you’re looking for on your huge bookshelf.";
       p1 = "If you sorted your collection alphabetically, you could implement a binary search to locate whatever book you need to find. This application visualizes what that process might look like!";
-      p2 = "Below, select a book to search, choose your speed, and click Start Search to begin.";
+      p2 = `Below, select a book to search, choose your speed, and click <span class="bold">Start Search</span> to begin.`;
       image = "./assets/cat-bs.png";
       break;
   }
   welcomeHeader.textContent = header;
   welcomeSubheader.textContent = subheader;
-  welcomeP1.textContent = p1;
-  welcomeP2.textContent = p2;
+  welcomeP1.innerHTML = p1;
+  welcomeP2.innerHTML = p2;
   welcomeImgSrc.src = image;
 }
 
