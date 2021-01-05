@@ -3,7 +3,7 @@ let subjectArray = [];
 
 async function getBooks(subject) {
   try {
-    const url = `http://openlibrary.org/subjects/${subject}.json?limit=96`;
+    const url = `https://openlibrary.org/subjects/${subject}.json?limit=96`;
     const responses = await axios.get(url);
     subjectArray = [...responses.data.works];
     subjectArray.sort((a, b) => {
