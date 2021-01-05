@@ -15,7 +15,8 @@ General Styling
   --clr-accent-five: #81B5B7;
 
   --serif: 'Libre Baskerville', serif;
-  --sans-serif:'Nunito', sans-serif
+  --sans-serif:'Nunito', sans-serif;
+  --accent: 'Heebo', sans-serif;
 }
 
 *, 
@@ -273,7 +274,7 @@ Hidden Divs (Welcome and Results)
 .author-name,
 .weclome h1,
 .welcome h4 {
-  line-height: 1;
+  line-height: 1.6;
 }
 
 #book-title,
@@ -288,6 +289,23 @@ Hidden Divs (Welcome and Results)
 .welcome p {
   display: block;
   margin: 1em 0;
+}
+
+.welcome h1 {
+  font-size: 2rem;
+  padding-bottom: .5em;
+  font-family: var(--accent);
+  color: var(--clr-darkgray);
+}
+
+.welcome-p {
+  padding: .5em 0;
+}
+
+.bold {
+  font-weight: bold;
+  color: var(--clr-darkgray);
+  font-family: var(--accent);
 }
 
 .author-name {
@@ -338,7 +356,7 @@ Hidden Divs (Welcome and Results)
   width: min(95%, 60rem);
   border: 2px solid var(--clr-darkgray);
   border-radius: 10px;
-  background-color: rgba(255,255,255, .9);
+  background-color: rgba(255,255,255, .95);
   padding: 1.5em;
   box-shadow: 0 10px 25px rgba(0, 0, 0, .6);
 }
@@ -379,6 +397,12 @@ Hidden Divs (Welcome and Results)
   .image {
       margin-right: 1em;
       margin-left: 1em;
+  }
+}
+
+@media (min-width: 800px) {
+  .welcome-container {
+    max-height: calc(100vh - 35%);
   }
 }
 
