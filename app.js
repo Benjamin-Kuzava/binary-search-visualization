@@ -16,7 +16,7 @@ async function getBooks(subject) {
     console.log(error);
   }
 }
-getBooks('literature');
+getBooks('fantasy');
 
 // Append book titles to dropdown
 function bookOptions(array) {
@@ -109,8 +109,8 @@ async function binarySearchHelper(array, target, left, right) {
           potentialBook.classList.remove('match');
           getCover(subjectArray[mid]['cover_id']);
           populateBookInfo(mid);
-          await sleep(1000);
-          displayInfo();
+          await sleep(500);
+          toggleDiv('.pop-up');
           reset(subjectArray); // take a look at this again
           return mid;
         } else if (target < potentialMatch) {
@@ -204,17 +204,23 @@ function selectSpeed() {
 }
 
 // Toggles hidden book information
-function displayInfo() {
-  const result = document.querySelector('.pop-up');
+function toggleDiv(elementName) {
+  const result = document.querySelector(`${elementName}`);
   result.classList.toggle('hidden');
 }
 
-// Event listener inside book info
+// Event listeners for closing divs
 const closeInfo = document.querySelector('#result-close');
   closeInfo.addEventListener('click', (e) => {
     e.preventDefault();
-    displayInfo();
+    toggleDiv('.pop-up');
   });
+
+  const closeWelcome = document.querySelector('.close');
+    closeWelcome.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleDiv('.welcome-wrapper');
+    });
 
 // Grab book cover if available
   function getCover(id) {
@@ -233,11 +239,13 @@ async function bookSummary(key) {
     const responses = await axios.get(url);
     const bookContent = document.querySelector('.book-content');
     const description = responses.data.description;
-    console.log(typeof(description))
+    // Some summaries are one step deeper in the json object
     if(typeof(description) === 'string') {
       bookContent.textContent = cleanSummary(description);
-    } else {
+    } else if(typeof(description) === 'object') {
       bookContent.textContent = cleanSummary(description['value']);
+    } else {
+      bookContent.textContent = "If you are reading this, then unfortunately Open Library's API did not have a book summary available for this title. However, I can assure you that there's a summary out there on the internet, so RIP Open Library."
     }
   } catch (error) {
     console.log(error);

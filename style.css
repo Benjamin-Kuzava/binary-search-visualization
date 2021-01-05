@@ -3,7 +3,6 @@ General Styling
 ----------- */
 :root { 
   --clr-white: whitesmoke;
-  /* --clr-light: rgb(249, 157, 120); */
   --clr-light: #68B442;
   --clr-dark: rgb(28, 39, 43);
   --clr-lightgray: rgb(109, 128, 145);
@@ -12,7 +11,6 @@ General Styling
 
   --clr-accent-one: #5C3326;
   --clr-accent-two: #C73845;
-  --clr-accent-three: #68B442;
   --clr-accent-four: #ABCA3B;
   --clr-accent-five: #81B5B7;
 
@@ -264,19 +262,30 @@ select:hover {
   top: 65%;
 }
 
+/* -----------
+Hidden Divs (Welcome and Results)
+----------- */
 .hidden {
   display: none;
 }
 
 #book-title,
-.author-name {
+.author-name,
+.weclome h1,
+.welcome h4 {
   line-height: 1;
-  font-family: var(--serif);
+}
+
+#book-title,
+.author-name {
   font-variant: small-caps;
+  font-family: var(--serif);
 }
 
 .author-name,
-.book-content {
+.book-content
+.welcome h4,
+.welcome p {
   display: block;
   margin: 1em 0;
 }
@@ -296,20 +305,35 @@ select:hover {
   border-radius: 2px;
 }
 
-.pop-up {
+.pop-up,
+.welcome-wrapper {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 2;
 }
 
-.result {
+.welcome-wrapper {
+  margin: auto;
+  right: 0;
+  bottom: 0;
+}
+
+.result,
+.welcome {
   display: flex;
-  flex-direction: column;
+  flex-flow: column wrap;
   padding: 1rem 0;
 }
 
-.result-container {
+.welcome {
+  height: 100%;
+  text-align: center;
+  justify-content: space-between;
+}
+
+.result-container,
+.welcome-container {
   margin: 0 auto;
   width: min(95%, 60rem);
   border: 2px solid var(--clr-darkgray);
@@ -319,7 +343,16 @@ select:hover {
   box-shadow: 0 10px 25px rgba(0, 0, 0, .6);
 }
 
-#result-close {
+.welcome-container {
+  height: 100vh;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex button {
   cursor: pointer;
   border: 0;
   padding: .5em 1em;
@@ -349,7 +382,10 @@ select:hover {
   }
 }
 
-/* Search Visualization CSS */
+
+/* -----------
+Search Visualization
+ ----------- */
 .rightBound,
 .leftBound {
   background-color: var(--clr-accent-five);
