@@ -8,11 +8,13 @@ The Bookcase: Binary Search Visualization
 
 Users can generate a random collection of books that are then arranged on a virtual bookshelf. Users can select a specific title to see how the binary search algorithm locates a specific book on the shelf. While the search runs, values tracked within the algorithm are highlighted, including the left and right bounds and current target.
 
-Additionally, clicking on a book will allow users to view additional information or follow a link back to Open Library to learn more.
+After the search finishes, a window pops up that displays additional information about the selected book.
 
 ## API and Data Sample
 
 [Open Library API](https://openlibrary.org/developers/api)
+
+One of the API's functionalities is a subject search, which returns a list of book objects. Below is a single book object from the API.
 
 ```
 {
@@ -75,14 +77,14 @@ Additionally, clicking on a book will allow users to view additional information
 
 #### MVP 
 
-- Generate a random collection of books.
-- Click on a book on the shelf to view additional information.
+- Generate a collection of books on page load.
 - Click button to run a visual binary search for a title somewhere in the collection.
-- Ability to adjust speed of search
-- Keep track of variables in serach algoritm
+- Ability to adjust speed of search.
+- Keep track of variables in serach algoritm.
 
 #### PostMVP  
 
+- Add welcome pop-up.
 - Add a linear search option for comparision.
 - Add more advanced CSS animations.
 - Consider Goodreads API for extra functionality. 
@@ -99,7 +101,7 @@ Additionally, clicking on a book will allow users to view additional information
 |Dec 30| JS and CSS for visualizing binary search | Completed
 |Jan 3| Additional CSS / PMVP if applicable | Completed
 |Jan 4| MVP | Completed
-|Jan 5| Presentations | Incomplete
+|Jan 5| Presentations | Compeleted
 
 ## Priority Matrix
 
@@ -109,26 +111,24 @@ Additionally, clicking on a book will allow users to view additional information
 
 | Component | Priority | Estimated Time | Time Invested | Actual Time |
 | --- | :---: |  :---: | :---: | :---: |
-| Basic HTML/CSS| L | 1hr| 1hr | 1hr |
-| Fetch info from API | H | 1hr| 1hr | 1hr  |
+| Basic HTML/CSS| L | 1hr | 1hr | 1hr |
+| Fetch info from API | H | 1hr| 1hr | 1hr |
 | Grid and design for bookshelf | H | 3hrs | 4hrs | 4hrs |
 | Connect API info and HTML elements| H | 3hrs | 3hrs | 3hrs |
 | JS for generating books | H | 2hrs | 2hrs | 2hrs |
 | JS for User inputs | H | 3hrs | 5hrs | 5hrs |
-| MVP CSS | H | 3hr| 8hrss  | 8hrs |
+| MVP CSS | H | 3hrs | 8hrs | 8hrs |
 | Responsive design | M | 3hrs | 5hrs | 5hrs |
 | Basic JS for BS search| H | 3hrs | 5hrs |  5hrs |
 | Basic CSS for BS search| H | 3hrs | 3hrs | 3hrs |
 | Speed adjustment for BS search| L | 3hrs | 2hrs | 2hrs |
 | Advanced CSS styling| L | 3hrs | 10hrs | 10hrs |
-| General QA/debugging | H | 5hrs | 5hrs | 5hrs |
-| Total | H | 40hrs | 54hrs | 54hrs |
+| General QA/debugging | H | 3hrs | 3hrs | 3hrs |
+| Total | H | 40hrs | 52hrs | 52hrs |
 
 ## Code Snippet
-Below is the code used to visualize the binary search. The most difficult section of the project was manipulating the base algoritm to visualize what the algorithm is doing.
+Below is the code used to visualize the binary search. The most difficult section of the project was learning how to both manipulate the speed of the algorithm and learn how to visualize what the algorithm is doing.
 ```
-const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
-
 function binarySearch(array, target) {
     return binarySearchHelper(array, target, 0, array.length - 1);
 }
@@ -141,6 +141,8 @@ async function binarySearchHelper(array, target, left, right) {
         let rightBook = document.querySelector(`#i${array[right]}`);
         let potentialBook = document.querySelector(`#i${array[mid]}`);
         let speed = selectSpeed();
+
+      // Update variable boxes && display bounds on bookshelf each iteration
         document.querySelector('.midpoint').textContent = ``;
         document.querySelector('.low').textContent = `${left}`;
         document.querySelector('.high').textContent = `${right}`;
@@ -149,6 +151,7 @@ async function binarySearchHelper(array, target, left, right) {
         await sleep(speed);
         potentialBook.classList.add('mid');
         document.querySelector('.midpoint').textContent = `${mid}`;
+      // Run search
         if (target === potentialMatch) {
           await sleep(500)
           leftBook.classList.remove('leftBound');
@@ -159,7 +162,11 @@ async function binarySearchHelper(array, target, left, right) {
           potentialBook.classList.add('match');
           await sleep(speed);
           potentialBook.classList.remove('match');
-          reset(subjectArray);
+          getCover(subjectArray[mid]['cover_id']);
+          populateBookInfo(mid);
+          await sleep(500);
+          toggleDiv('.pop-up');
+          reset(subjectArray); // take a look at this again
           return mid;
         } else if (target < potentialMatch) {
           await sleep(speed);
@@ -175,6 +182,7 @@ async function binarySearchHelper(array, target, left, right) {
           potentialBook.classList.remove('mid');
         }
     }
+  // If no book is selected
     document.querySelector('.button').textContent = 'NO MATCH';
     await sleep(1000);
     reset(subjectArray);
@@ -183,6 +191,6 @@ async function binarySearchHelper(array, target, left, right) {
 }
 ```
 ## Change Log
-```
-	W.I.P.
-```
+- Books now generate on page load instead of being attached to a button. 
+- Removed ability to click on a book at any time to view more information. The focus of this specific app is on the search, so the on-click effect is now a secondary option to select a book to search.
+

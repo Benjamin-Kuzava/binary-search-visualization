@@ -280,7 +280,7 @@ function disableButton(button, time) {
   button.disabled = true;
   setTimeout(() => {
     button.disabled = false;
-  }, time)
+  }, time);
 }
 
 // Alternate way to select dropdown
