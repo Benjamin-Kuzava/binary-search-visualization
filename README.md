@@ -101,7 +101,7 @@ One of the API's functionalities is a subject search, which returns a list of bo
 |Dec 30| JS and CSS for visualizing binary search | Completed
 |Jan 3| Additional CSS / PMVP if applicable | Completed
 |Jan 4| MVP | Completed
-|Jan 5| Presentations | Compeleted
+|Jan 5| Presentations | Completed
 
 ## Priority Matrix
 
