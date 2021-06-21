@@ -80,7 +80,7 @@ One of the API's functionalities is a subject search, which returns a list of bo
 - Generate a collection of books on page load.
 - Click button to run a visual binary search for a title somewhere in the collection.
 - Ability to adjust speed of search.
-- Keep track of variables in serach algoritm.
+- Keep track of variables in search algoritm.
 
 #### PostMVP  
 
